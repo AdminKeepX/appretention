@@ -8,9 +8,9 @@ export default function Header() {
       position="fixed"
       sx={{
         boxShadow: 0,
-        bgcolor: 'transparent',
+        bgcolor: 'white',
         backgroundImage: 'none',
-        mt: 2,
+        mt: 1,
       }}
     >
       <Container maxWidth="lg">

@@ -15,6 +15,7 @@ import { Container, styled } from "@mui/material";
 import { useState } from "react";
 import HomeTab from "./Tabs/HomeTab";
 import CreateTab from "./Tabs/CreateTab";
+import Request from "./Tabs/Request";
 
 const MainContainer = styled(Container)`
   background-color: white;
@@ -36,7 +37,7 @@ function App() {
       content = <CreateTab />;
       break;
     case 2:
-      content = <HomeTab />;
+      content = <Request />;
       break;
     case 3:
       content = <HomeTab />;
