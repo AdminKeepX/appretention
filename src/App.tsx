@@ -14,6 +14,7 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { Container, styled } from "@mui/material";
 import { useState } from "react";
 import HomeTab from "./Tabs/HomeTab";
+import CreateTab from "./Tabs/CreateTab";
 
 const MainContainer = styled(Container)`
   background-color: white;
@@ -32,7 +33,7 @@ function App() {
       content = <HomeTab />;
       break;
     case 1:
-      content = <HomeTab />;
+      content = <CreateTab />;
       break;
     case 2:
       content = <HomeTab />;
