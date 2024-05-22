@@ -18,10 +18,10 @@ import CreateTab from "./Tabs/CreateTab";
 import Request from "./Tabs/Request";
 
 const MainContainer = styled(Container)`
-  background-color: white;
-  margin-top: 64px; /* Height of the AppBar */
+  background-color: gray;
+  margin-top: 20px; /* Height of the AppBar */
   padding: 20px;
-  height: calc(100vh - 64px); /* Full height minus AppBar height */
+  height: calc(100vh - 20px); /* Full height minus AppBar height */
   overflow-y: auto;
 `;
 
