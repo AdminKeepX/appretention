@@ -46,14 +46,15 @@ function App() {
 
   return (
     <>
+    <MainContainer maxWidth="lg">
       <AppAppBar/>
     
       <Box sx={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', mt: 8 }}>
-      <MainContainer maxWidth="lg">
+      
         <Container sx={{ flexGrow: 1, padding: 1 }}>
           {content}
         </Container>
-        </MainContainer>
+        
         <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
           <BottomNavigation
             showLabels
@@ -69,6 +70,7 @@ function App() {
           </BottomNavigation>
         </Paper>
       </Box>
+      </MainContainer>
     </>
   );
 }
