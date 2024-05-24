@@ -2,9 +2,11 @@ import React from 'react';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import ContentContainer from "../components/ContentContainer";
   
 const Request: React.FC = () => {
     return (
+        <ContentContainer>
         <Stack spacing={2}>
             <TextField id="outlined-basic" label="Secret" variant="outlined" />
             
@@ -20,6 +22,7 @@ const Request: React.FC = () => {
             }}>Request</Button>
             
         </Stack>
+        </ContentContainer>
     );
   };
   

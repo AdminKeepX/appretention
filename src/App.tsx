@@ -4,9 +4,10 @@ import { useTonConnect } from "./hooks/useTonConnect";
 import { CHAIN } from "@tonconnect/protocol";
 import "@twa-dev/sdk";
 import AppAppBar from "./components/MainAppBar";
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import HomeIcon from '@mui/icons-material/Home';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
+import InfoIcon from '@mui/icons-material/Info';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import BottomNavigation from '@mui/material/BottomNavigation';
@@ -16,12 +17,13 @@ import { useState } from "react";
 import HomeTab from "./Tabs/HomeTab";
 import CreateTab from "./Tabs/CreateTab";
 import Request from "./Tabs/Request";
+import AboutTab from "./Tabs/AboutTab";
 
 const MainContainer = styled(Container)`
-  background-color: gray;
-  margin-top: 20px; /* Height of the AppBar */
-  padding: 20px;
-  height: calc(100vh - 20px); /* Full height minus AppBar height */
+  background-color: white; /* Устанавливаем белый фон */
+  margin-top: 20px; /* Высота AppBar */
+  padding: 0; /* Убираем отступы */
+  height: calc(100vh - 20px); /* Полная высота минус высота AppBar */
   overflow-y: auto;
 `;
 
@@ -40,7 +42,7 @@ function App() {
       content = <Request />;
       break;
     case 3:
-      content = <HomeTab />;
+      content = <AboutTab />;
       break;
     default:
       content = <HomeTab />;
@@ -53,7 +55,7 @@ function App() {
     
       <Box sx={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', mt: 8 }}>
       
-        <Container sx={{ flexGrow: 1, padding: 1 }}>
+        <Container sx={{ flexGrow: 1, padding: 0 }}> {/* Убираем отступы */}
           {content}
         </Container>
         
@@ -65,10 +67,10 @@ function App() {
               setValue(newValue);
             }}
           >
-            <BottomNavigationAction label="Home" icon={<RestoreIcon />} />
-            <BottomNavigationAction label="Create" icon={<FavoriteIcon />} />
-            <BottomNavigationAction label="Request" icon={<LocationOnIcon />} />
-            <BottomNavigationAction label="About" icon={<LocationOnIcon />} />
+            <BottomNavigationAction label="Home" icon={<HomeIcon />} />
+            <BottomNavigationAction label="Create" icon={<AddCircleIcon />} />
+            <BottomNavigationAction label="Request" icon={<RequestQuoteIcon />} />
+            <BottomNavigationAction label="About" icon={<InfoIcon />} />
           </BottomNavigation>
         </Paper>
       </Box>
@@ -78,9 +80,3 @@ function App() {
 }
 
 export default App;
-
-// {network
-//   ? network === CHAIN.MAINNET
-//     ? "mainnet"
-//     : "testnet"
-//   : "N/A"}
