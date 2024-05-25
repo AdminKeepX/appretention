@@ -30,10 +30,15 @@ const MainContainer = styled(Container)`
 function App() {
   const { network } = useTonConnect();
   const [value, setValue] = useState(0);
+
+  const switchToCreateTab = () => {
+    setValue(1); // Assuming the index of CreateTab is 1
+  };
+
   let content;
   switch (value) {
     case 0:
-      content = <HomeTab />;
+      content = <HomeTab switchToCreateTab={switchToCreateTab} />;
       break;
     case 1:
       content = <CreateTab />;
@@ -45,7 +50,7 @@ function App() {
       content = <AboutTab />;
       break;
     default:
-      content = <HomeTab />;
+      content = <HomeTab switchToCreateTab={switchToCreateTab} />;
   }
 
   return (
