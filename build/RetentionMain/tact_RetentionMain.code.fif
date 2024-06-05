@@ -1,0 +1,1083 @@
+PROGRAM{
+  DECLPROC __tact_verify_address
+  DECLPROC __tact_load_address
+  DECLPROC __tact_store_address
+  DECLPROC __tact_create_address
+  DECLPROC __tact_compute_contract_address
+  DECLPROC __tact_my_balance
+  DECLPROC __tact_not_null
+  DECLPROC __tact_context_get
+  DECLPROC __tact_context_get_sender
+  DECLPROC __tact_store_bool
+  DECLPROC __tact_slice_eq_bits
+  DECLPROC __tact_dict_set_code
+  DECLPROC __tact_dict_get_code
+  DECLPROC $Deploy$_load
+  DECLPROC $DeployOk$_store
+  DECLPROC $DeployOk$_store_cell
+  DECLPROC $CreateRetentionContract$_load
+  DECLPROC $RefundIfPossible$_load
+  DECLPROC $InternalAskForRefund$_store
+  DECLPROC $InternalAskForRefund$_store_cell
+  DECLPROC $InternalCreateRefund$_store
+  DECLPROC $InternalCreateRefund$_store_cell
+  DECLPROC $InternalReplyFromRetentionRefund$_load
+  DECLPROC $InternalAskForRefundCompleted$_load
+  DECLPROC $InternalRefundContractCreated$_store
+  DECLPROC $InternalRefundContractCreated$_store_cell
+  DECLPROC $InternalRefundContractClosed$_store
+  DECLPROC $InternalRefundContractClosed$_store_cell
+  DECLPROC $RetentionMain$_store
+  DECLPROC $RetentionMain$_load
+  DECLPROC $StateInit$_not_null
+  DECLPROC $Context$_get_value
+  DECLPROC $RetentionRefund$init$_store
+  DECLPROC $RetentionUser$init$_store
+  DECLPROC $RetentionMain$init$_load
+  DECLPROC $RetentionMain$_contract_init
+  DECLPROC $RetentionMain$_contract_load
+  DECLPROC $RetentionMain$_contract_store
+  DECLPROC $global_contractAddress
+  DECLPROC $global_send
+  DECLPROC $RetentionRefund$_init_child
+  DECLPROC $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+  DECLPROC $RetentionUser$_init_child
+  DECLPROC $RetentionMain$_fun_onlyOwner
+  DECLPROC $RetentionMain$_fun_nextIndex
+  DECLPROC $RetentionMain$_fun_currentLocked
+  DECLPROC $RetentionMain$_fun_allTimeLocked
+  DECLPROC $RetentionMain$_fun_allTimeRefunded
+  DECLPROC $RetentionMain$_fun_commission
+  DECLPROC $RetentionMain$_fun_forward
+  DECLPROC $RetentionMain$_fun_reply
+  DECLPROC $RetentionMain$_fun_notify
+  DECLPROC $RetentionMain$_fun_requireNotStopped
+  DECLPROC $RetentionMain$_fun_requireStopped
+  DECLPROC $RetentionMain$_fun_stopped
+  DECLPROC $RetentionMain$_fun_requireOwner
+  DECLPROC $RetentionMain$_fun_owner
+  DECLPROC $SendParameters$_constructor_to_value_mode_bounce_data_code_body
+  DECLPROC $InternalCreateRefund$_constructor_index_expiration_creator
+  DECLPROC $InternalRefundContractCreated$_constructor_contract_amount_index
+  DECLPROC $SendParameters$_constructor_to_value_mode_bounce_body
+  DECLPROC $InternalAskForRefund$_constructor_toAddress_secret_memo
+  DECLPROC $InternalRefundContractClosed$_constructor_contract_amount_index
+  DECLPROC $SendParameters$_constructor_to_bounce_value
+  DECLPROC $DeployOk$_constructor_queryId
+  DECLPROC $RetentionMain$_internal_binary_CreateRetentionContract
+  DECLPROC $RetentionMain$_internal_binary_InternalReplyFromRetentionRefund
+  DECLPROC $RetentionMain$_internal_binary_RefundIfPossible
+  DECLPROC $RetentionMain$_internal_binary_InternalAskForRefundCompleted
+  DECLPROC $RetentionMain$_internal_text_beb2935a82089b154d32f99c4377aa960aa115366cc2c602755e36b97f505cec
+  DECLPROC $RetentionMain$_internal_text_aea84646a207ae33db639dd9c8e236a66acfba16619c5b8845856db8f85336aa
+  DECLPROC $RetentionMain$_internal_text_4173e3c81e3ba6640260d86432fae0b3fe18f46e2b7abfc90809c64b332ececb
+  DECLPROC %$RetentionMain$_internal_empty
+  DECLPROC $RetentionMain$_internal_binary_Deploy
+  DECLPROC $RetentionMain$_internal_text_6c8f44f45fedb4cdfed4de8db14aa5b13ad55d430f759d0669210b74c48fe3df
+  DECLPROC $RetentionMain$_internal_text_bcfaf776907c719cc8d379d8f194aaaa27e8ca2871cd591781721f215a454501
+  70866 DECLMETHOD %nextIndex
+  105854 DECLMETHOD %currentLocked
+  100031 DECLMETHOD %allTimeLocked
+  129520 DECLMETHOD %allTimeRefunded
+  112356 DECLMETHOD %commission
+  74107 DECLMETHOD %stopped
+  83229 DECLMETHOD %owner
+  113617 DECLMETHOD supported_interfaces
+  121275 DECLMETHOD get_abi_ipfs
+  115390 DECLMETHOD lazy_deployment_completed
+  DECLPROC $RetentionMain$_contract_router_internal
+  DECLPROC recv_internal
+  DECLGLOBVAR __tact_context
+  DECLGLOBVAR __tact_context_sender
+  DECLGLOBVAR __tact_context_sys
+  DECLGLOBVAR __tact_randomized
+  __tact_verify_address PROCINLINE:<{
+    DUP
+    SBITS
+    267 PUSHINT
+    EQUAL
+    136 THROWIFNOT
+    DUP
+    11 PLDU
+    DUP
+    1279 PUSHINT
+    EQUAL
+    137 THROWIF
+    10 PUSHPOW2
+    EQUAL
+    136 THROWIFNOT
+  }>
+  __tact_load_address PROCINLINE:<{
+    LDMSGADDR
+    SWAP
+    __tact_verify_address INLINECALLDICT
+  }>
+  __tact_store_address PROCINLINE:<{
+    __tact_verify_address INLINECALLDICT
+    STSLICER
+  }>
+  __tact_create_address PROCINLINE:<{
+    NEWC
+    2 PUSHINT
+    SWAP
+    2 STU
+    0 PUSHINT
+    SWAP
+    1 STU
+    s1 s2 XCHG
+    8 STI
+    256 STU
+    ENDC
+    CTOS
+    __tact_verify_address INLINECALLDICT
+  }>
+  __tact_compute_contract_address PROCINLINE:<{
+    NEWC
+    0 PUSHINT
+    SWAP
+    2 STU
+    3 PUSHINT
+    SWAP
+    2 STU
+    0 PUSHINT
+    SWAP
+    1 STU
+    s1 s2 XCHG
+    STREF
+    STREF
+    ENDC
+    HASHCU
+    __tact_create_address INLINECALLDICT
+  }>
+  __tact_my_balance PROCINLINE:<{
+    BALANCE
+    FIRST
+  }>
+  __tact_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+  }>
+  __tact_context_get PROCINLINE:<{
+    __tact_context GETGLOB
+    4 UNTUPLE
+  }>
+  __tact_context_get_sender PROCINLINE:<{
+    __tact_context_sender GETGLOB
+  }>
+  __tact_store_bool PROCINLINE:<{
+    SWAP
+    1 STI
+  }>
+  __tact_slice_eq_bits PROCINLINE:<{
+    SDEQ
+  }>
+  __tact_dict_set_code PROCINLINE:<{
+    s0 s2 XCHG
+    16 PUSHINT
+    DICTUSETREF
+  }>
+  __tact_dict_get_code PROCINLINE:<{
+    SWAP
+    16 PUSHINT
+    DICTUGETREF
+    NULLSWAPIFNOT
+    135 THROWIFNOT
+  }>
+  $Deploy$_load PROCINLINE:<{
+    32 LDU
+    SWAP
+    2490013878 PUSHINT
+    EQUAL
+    129 THROWIFNOT
+    64 LDU
+    SWAP
+  }>
+  $DeployOk$_store PROCINLINE:<{
+    2952335191 PUSHINT
+    ROT
+    32 STU
+    64 STU
+  }>
+  $DeployOk$_store_cell PROCINLINE:<{
+    NEWC
+    SWAP
+    $DeployOk$_store INLINECALLDICT
+    ENDC
+  }>
+  $CreateRetentionContract$_load PROCINLINE:<{
+    32 LDU
+    SWAP
+    2340115651 PUSHINT
+    EQUAL
+    129 THROWIFNOT
+    32 LDU
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    64 LDU
+    4 -ROLL
+  }>
+  $RefundIfPossible$_load PROCINLINE:<{
+    32 LDU
+    SWAP
+    1985343089 PUSHINT
+    EQUAL
+    129 THROWIFNOT
+    LDREF
+    SWAP
+    CTOS
+    SWAP
+    LDREF
+    SWAP
+    CTOS
+    s1 s2 XCHG
+  }>
+  $InternalAskForRefund$_store PROCINLINE:<{
+    1536850620 PUSHINT
+    s0 s4 XCHG2
+    32 STU
+    ROT
+    __tact_store_address INLINECALLDICT
+    256 STU
+    256 STU
+  }>
+  $InternalAskForRefund$_store_cell PROCINLINE:<{
+    NEWC
+    3 -ROLL
+    $InternalAskForRefund$_store INLINECALLDICT
+    ENDC
+  }>
+  $InternalCreateRefund$_store PROCINLINE:<{
+    1772334149 PUSHINT
+    s0 s4 XCHG2
+    32 STU
+    s1 s2 XCHG
+    32 STU
+    64 STU
+    SWAP
+    __tact_store_address INLINECALLDICT
+  }>
+  $InternalCreateRefund$_store_cell PROCINLINE:<{
+    NEWC
+    3 -ROLL
+    $InternalCreateRefund$_store INLINECALLDICT
+    ENDC
+  }>
+  $InternalReplyFromRetentionRefund$_load PROCINLINE:<{
+    32 LDU
+    SWAP
+    1223691349 PUSHINT
+    EQUAL
+    129 THROWIFNOT
+    64 LDU
+    257 PUSHINT
+    LDIX
+    __tact_load_address INLINECALLDICT
+    SWAP
+    __tact_load_address INLINECALLDICT
+    s1 s4 XCHG
+    s3 s3 s0 XCHG3
+  }>
+  $InternalAskForRefundCompleted$_load PROCINLINE:<{
+    32 LDU
+    SWAP
+    3589743355 PUSHINT
+    EQUAL
+    129 THROWIFNOT
+    64 LDU
+    __tact_load_address INLINECALLDICT
+    SWAP
+    __tact_load_address INLINECALLDICT
+    SWAP
+    32 LDU
+    4 -ROLL
+  }>
+  $InternalRefundContractCreated$_store PROCINLINE:<{
+    1255266380 PUSHINT
+    s0 s4 XCHG2
+    32 STU
+    ROT
+    __tact_store_address INLINECALLDICT
+    64 STU
+    32 STU
+  }>
+  $InternalRefundContractCreated$_store_cell PROCINLINE:<{
+    NEWC
+    3 -ROLL
+    $InternalRefundContractCreated$_store INLINECALLDICT
+    ENDC
+  }>
+  $InternalRefundContractClosed$_store PROCINLINE:<{
+    2840063567 PUSHINT
+    s0 s4 XCHG2
+    32 STU
+    ROT
+    __tact_store_address INLINECALLDICT
+    64 STU
+    32 STU
+  }>
+  $InternalRefundContractClosed$_store_cell PROCINLINE:<{
+    NEWC
+    3 -ROLL
+    $InternalRefundContractClosed$_store INLINECALLDICT
+    ENDC
+  }>
+  $RetentionMain$_store PROCINLINE:<{
+    s7 s8 XCHG2
+    32 STU
+    s1 s5 XCHG
+    64 STU
+    s1 s3 XCHG
+    64 STU
+    64 STU
+    64 STU
+    SWAP
+    __tact_store_address INLINECALLDICT
+    32 STU
+    1 STI
+  }>
+  $RetentionMain$_load PROCINLINE:<{
+    32 LDU
+    64 LDU
+    64 LDU
+    64 LDU
+    64 LDU
+    __tact_load_address INLINECALLDICT
+    SWAP
+    32 LDU
+    1 LDI
+    8 -ROLL
+  }>
+  $StateInit$_not_null PROCINLINE:<{
+    DUP
+    ISNULL
+    128 THROWIF
+    2 UNTUPLE
+  }>
+  $Context$_get_value PROCINLINE:<{
+    s1 s3 XCHG
+    3 BLKDROP
+  }>
+  $RetentionRefund$init$_store PROCINLINE:<{
+    s2 s3 XCHG2
+    257 PUSHINT
+    STIX
+    257 PUSHINT
+    STIX
+    SWAP
+    __tact_store_address INLINECALLDICT
+  }>
+  $RetentionUser$init$_store PROCINLINE:<{
+    -ROT
+    __tact_store_address INLINECALLDICT
+    SWAP
+    __tact_store_address INLINECALLDICT
+  }>
+  $RetentionMain$init$_load PROCINLINE:<{
+    257 PUSHINT
+    LDIX
+    __tact_load_address INLINECALLDICT
+    s1 s2 XCHG
+  }>
+  $RetentionMain$_contract_init PROCREF:<{
+    0 PUSHINT
+    s0 s0 s0 PUSH3
+    FALSE
+    1000000000 PUSHINT
+    s0 s7 XCHG
+    s5 s6 XCHG
+    s4 s5 XCHG
+    s3 s4 XCHG
+    s3 s0 s0 XCHG3
+  }>
+  $RetentionMain$_contract_load PROCREF:<{
+    c4 PUSH
+    CTOS
+    LDREF
+    SWAP
+    __tact_context_sys SETGLOB
+    1 LDI
+    SWAP
+    IFJMP:<{
+      $RetentionMain$_load INLINECALLDICT
+      1 8 BLKDROP2
+    }>
+    MYADDR
+    11 PLDU
+    10 PUSHPOW2
+    EQUAL
+    137 THROWIFNOT
+    $RetentionMain$init$_load INLINECALLDICT
+    s0 s2 XCHG
+    ENDS
+    SWAP
+    $RetentionMain$_contract_init INLINECALLDICT
+  }>
+  $RetentionMain$_contract_store PROCINLINE:<{
+    NEWC
+    __tact_context_sys GETGLOB
+    SWAP
+    STREF
+    TRUE
+    SWAP
+    1 STI
+    8 -ROLL
+    $RetentionMain$_store INLINECALLDICT
+    ENDC
+    c4 POP
+  }>
+  $global_contractAddress PROCINLINE:<{
+    0 PUSHINT
+    -ROT
+    __tact_compute_contract_address INLINECALLDICT
+  }>
+  $global_send PROCREF:<{
+    NEWC
+    1 PUSHINT
+    SWAP
+    2 STI
+    s0 s7 XCHG2
+    __tact_store_bool INLINECALLDICT
+    0 PUSHINT
+    SWAP
+    3 STI
+    s0 s5 XCHG2
+    __tact_store_address INLINECALLDICT
+    s0 s3 XCHG2
+    STGRAMS
+    0 PUSHINT
+    SWAP
+    105 STI
+    s3 PUSH
+    ISNULL
+    NOT
+    IF:<{
+      TRUE
+    }>ELSE<{
+      s4 PUSH
+      ISNULL
+      NOT
+    }>
+    IF:<{
+      TRUE
+      __tact_store_bool INLINECALLDICT
+      NEWC
+      FALSE
+      __tact_store_bool INLINECALLDICT
+      FALSE
+      __tact_store_bool INLINECALLDICT
+      s4 PUSH
+      ISNULL
+      NOT
+      IF:<{
+        TRUE
+        __tact_store_bool INLINECALLDICT
+        s0 s4 XCHG
+        __tact_not_null INLINECALLDICT
+        s0 s4 XCHG2
+        STREF
+      }>ELSE<{
+        s4 POP
+        s0 s3 XCHG
+        FALSE
+        __tact_store_bool INLINECALLDICT
+      }>
+      s4 PUSH
+      ISNULL
+      NOT
+      IF:<{
+        TRUE
+        __tact_store_bool INLINECALLDICT
+        s0 s4 XCHG
+        __tact_not_null INLINECALLDICT
+        s0 s4 XCHG2
+        STREF
+      }>ELSE<{
+        s4 POP
+        s0 s3 XCHG
+        FALSE
+        __tact_store_bool INLINECALLDICT
+      }>
+      FALSE
+      __tact_store_bool INLINECALLDICT
+      s0 s2 XCHG
+      TRUE
+      __tact_store_bool INLINECALLDICT
+      s0 s2 XCHG
+      ENDC
+      ROT
+      STREF
+    }>ELSE<{
+      s3 POP
+      s3 POP
+      SWAP
+      FALSE
+      __tact_store_bool INLINECALLDICT
+    }>
+    OVER
+    ISNULL
+    NOT
+    IF:<{
+      TRUE
+      __tact_store_bool INLINECALLDICT
+      SWAP
+      __tact_not_null INLINECALLDICT
+      SWAP
+      STREF
+    }>ELSE<{
+      NIP
+      FALSE
+      __tact_store_bool INLINECALLDICT
+    }>
+    ENDC
+    SWAP
+    SENDRAWMSG
+  }>
+  $RetentionRefund$_init_child PROCREF:<{
+    s0 s3 XCHG
+    CTOS
+    LDDICT
+    DROP
+    NEWDICT
+    SWAP
+    26773 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    SWAP
+    26773 PUSHINT
+    s2 PUSH
+    __tact_dict_set_code INLINECALLDICT
+    NEWC
+    SWAP
+    NEWC
+    STDICT
+    ENDC
+    SWAP
+    STREF
+    FALSE
+    SWAP
+    1 STI
+    3 -ROLL
+    s0 s4 XCHG
+    $RetentionRefund$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $SendParameters$_constructor_bounce_to_value_mode_body_code_data PROCINLINE:<{
+  }>
+  $RetentionUser$_init_child PROCREF:<{
+    s0 s2 XCHG
+    CTOS
+    LDDICT
+    DROP
+    NEWDICT
+    SWAP
+    6903 PUSHINT
+    __tact_dict_get_code INLINECALLDICT
+    SWAP
+    6903 PUSHINT
+    s2 PUSH
+    __tact_dict_set_code INLINECALLDICT
+    NEWC
+    SWAP
+    NEWC
+    STDICT
+    ENDC
+    SWAP
+    STREF
+    FALSE
+    SWAP
+    1 STI
+    s0 s0 s3 XCHG3
+    $RetentionUser$init$_store INLINECALLDICT
+    ENDC
+  }>
+  $RetentionMain$_fun_onlyOwner PROCREF:<{
+    7184 PUSHINT
+    __tact_context_get_sender INLINECALLDICT
+    s4 s(-1) PUXC
+    __tact_slice_eq_bits INLINECALLDICT
+    THROWANYIFNOT
+  }>
+  $RetentionMain$_fun_nextIndex PROCREF:<{
+    s3 PUSH
+  }>
+  $RetentionMain$_fun_currentLocked PROCREF:<{
+    s6 PUSH
+  }>
+  $RetentionMain$_fun_allTimeLocked PROCREF:<{
+    s5 PUSH
+  }>
+  $RetentionMain$_fun_allTimeRefunded PROCREF:<{
+    s4 PUSH
+  }>
+  $RetentionMain$_fun_commission PROCREF:<{
+    s7 PUSH
+  }>
+  $RetentionMain$_fun_forward PROCREF:<{
+    PUSHNULL
+    PUSHNULL
+    s2 PUSH
+    ISNULL
+    NOT
+    IF:<{
+      2DROP
+      $StateInit$_not_null INLINECALLDICT
+      SWAP
+    }>ELSE<{
+      s2 POP
+    }>
+    s2 s4 XCHG
+    0 PUSHINT
+    s0 s3 XCHG
+    s0 s4 XCHG
+    66 PUSHINT
+    s2 s3 XCHG2
+    $SendParameters$_constructor_bounce_to_value_mode_body_code_data INLINECALLDICT
+    $global_send INLINECALLDICT
+  }>
+  $RetentionMain$_fun_reply PROCINLINE:<{
+    __tact_context_get_sender INLINECALLDICT
+    SWAP
+    TRUE
+    PUSHNULL
+    $RetentionMain$_fun_forward INLINECALLDICT
+  }>
+  $RetentionMain$_fun_notify PROCINLINE:<{
+    __tact_context_get_sender INLINECALLDICT
+    SWAP
+    FALSE
+    PUSHNULL
+    $RetentionMain$_fun_forward INLINECALLDICT
+  }>
+  $RetentionMain$_fun_requireNotStopped PROCREF:<{
+    40368 PUSHINT
+    OVER
+    NOT
+    THROWANYIFNOT
+  }>
+  $RetentionMain$_fun_requireStopped PROCREF:<{
+    53296 PUSHINT
+    OVER
+    THROWANYIFNOT
+  }>
+  $RetentionMain$_fun_stopped PROCREF:<{
+    DUP
+  }>
+  $RetentionMain$_fun_requireOwner PROCREF:<{
+    __tact_context_get_sender INLINECALLDICT
+    s3 s(-1) PUXC
+    __tact_slice_eq_bits INLINECALLDICT
+    132 THROWIFNOT
+  }>
+  $RetentionMain$_fun_owner PROCREF:<{
+    s2 PUSH
+  }>
+  $SendParameters$_constructor_to_value_mode_bounce_data_code_body PROCINLINE:<{
+    s3 s6 XCHG
+    s3 s5 XCHG
+    s3 s4 XCHG
+    s0 s2 XCHG
+  }>
+  $InternalCreateRefund$_constructor_index_expiration_creator PROCINLINE:<{
+  }>
+  $InternalRefundContractCreated$_constructor_contract_amount_index PROCINLINE:<{
+  }>
+  $SendParameters$_constructor_to_value_mode_bounce_body PROCINLINE:<{
+    s1 s4 XCHG
+    s3 s3 s0 XCHG3
+    PUSHNULL
+    PUSHNULL
+  }>
+  $InternalAskForRefund$_constructor_toAddress_secret_memo PROCINLINE:<{
+  }>
+  $InternalRefundContractClosed$_constructor_contract_amount_index PROCINLINE:<{
+  }>
+  $SendParameters$_constructor_to_bounce_value PROCINLINE:<{
+    s1 s2 XCHG
+    0 PUSHINT
+    PUSHNULL
+    PUSHNULL
+    PUSHNULL
+  }>
+  $DeployOk$_constructor_queryId PROCINLINE:<{
+  }>
+  $RetentionMain$_internal_binary_CreateRetentionContract PROCINLINE:<{
+    s3 POP
+    __tact_context_get INLINECALLDICT
+    s1 s3 XCHG
+    3 BLKDROP
+    __tact_context_get_sender INLINECALLDICT
+    s0 s3 XCHG
+    SHA256U
+    s0 s2 XCHG
+    SHA256U
+    s1 s12 XCPU
+    SUB
+    __tact_context_sys GETGLOB
+    MYADDR
+    s4 s3 s0 XCHG3
+    $RetentionRefund$_init_child INLINECALLDICT
+    2DUP
+    $global_contractAddress INLINECALLDICT
+    3 PUSHINT
+    FALSE
+    s11 s7 s6 PUXC2
+    $InternalCreateRefund$_constructor_index_expiration_creator INLINECALLDICT
+    $InternalCreateRefund$_store_cell INLINECALLDICT
+    s1 s6 XCHG
+    s4 s5 XCHG
+    s1 s3 XCHG
+    $SendParameters$_constructor_to_value_mode_bounce_data_code_body INLINECALLDICT
+    $global_send INLINECALLDICT
+    s0 s3 XCHG
+    INC
+    s0 s3 XCHG
+  }>
+  $RetentionMain$_internal_binary_InternalReplyFromRetentionRefund PROCINLINE:<{
+    __tact_context_sys GETGLOB
+    s7 s12 XCHG
+    s6 s11 XCHG
+    s5 s10 XCHG
+    s4 s9 XCHG
+    s3 s8 XCHG
+    s12 s11 s10 XCHG3
+    $RetentionMain$_fun_owner INLINECALLDICT
+    s11 s0 s12 XCHG3
+    $RetentionUser$_init_child INLINECALLDICT
+    2DUP
+    $global_contractAddress INLINECALLDICT
+    s6 s10 XCPU
+    ADD
+    50000000 PUSHINT
+    3 PUSHINT
+    s15 s12 XCHG2
+    FALSE
+    s0 s12 XCHG
+    $InternalRefundContractCreated$_constructor_contract_amount_index INLINECALLDICT
+    $InternalRefundContractCreated$_store_cell INLINECALLDICT
+    s6 s7 XCHG
+    s5 s14 XCHG
+    s4 s11 XCHG
+    s1 s10 XCHG
+    s1 s3 XCHG
+    $SendParameters$_constructor_to_value_mode_bounce_data_code_body INLINECALLDICT
+    $global_send INLINECALLDICT
+    s7 s6 s0 XCHG3
+    s3 s5 XCHG
+    s4 s1 s4 XCHG3
+    s3 s3 XCHG2
+  }>
+  $RetentionMain$_internal_binary_RefundIfPossible PROCINLINE:<{
+    __tact_context_get INLINECALLDICT
+    s1 s3 XCHG
+    3 BLKDROP
+    SWAP
+    SHA256U
+    s0 s2 XCHG
+    SHA256U
+    __tact_context_sys GETGLOB
+    MYADDR
+    s4 s2 s(-2) PU2XC
+    $RetentionRefund$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    3 PUSHINT
+    FALSE
+    __tact_context_get_sender INLINECALLDICT
+    s0 s6 s4 XCHG3
+    $InternalAskForRefund$_constructor_toAddress_secret_memo INLINECALLDICT
+    $InternalAskForRefund$_store_cell INLINECALLDICT
+    s1 s4 XCHG
+    $SendParameters$_constructor_to_value_mode_bounce_body INLINECALLDICT
+    $global_send INLINECALLDICT
+  }>
+  $RetentionMain$_internal_binary_InternalAskForRefundCompleted PROCINLINE:<{
+    __tact_context_sys GETGLOB
+    s7 s12 XCHG
+    s6 s11 XCHG
+    s5 s10 XCHG
+    s4 s9 XCHG
+    s3 s8 XCHG
+    s12 s11 s10 XCHG3
+    $RetentionMain$_fun_owner INLINECALLDICT
+    s11 s0 s9 XCHG3
+    $RetentionUser$_init_child INLINECALLDICT
+    $global_contractAddress INLINECALLDICT
+    41000000 PUSHINT
+    3 PUSHINT
+    s13 s10 XCHG2
+    FALSE
+    s0 s13 XCHG
+    $InternalRefundContractClosed$_constructor_contract_amount_index INLINECALLDICT
+    $InternalRefundContractClosed$_store_cell INLINECALLDICT
+    s1 s4 XCHG
+    s3 s12 XCHG
+    s9 s11 s0 XCHG3
+    $SendParameters$_constructor_to_value_mode_bounce_body INLINECALLDICT
+    $global_send INLINECALLDICT
+    s7 s5 s5 XCHG3
+    s0 s6 XCHG
+    s4 s1 s4 XCHG3
+    s0 s3 XCHG
+  }>
+  $RetentionMain$_internal_text_beb2935a82089b154d32f99c4377aa960aa115366cc2c602755e36b97f505cec PROCINLINE:<{
+    $RetentionMain$_fun_onlyOwner INLINECALLDICT
+    __tact_context_get_sender INLINECALLDICT
+    TRUE
+    __tact_my_balance INLINECALLDICT
+    __tact_context_get INLINECALLDICT
+    $Context$_get_value INLINECALLDICT
+    SUB
+    1000000000 PUSHINT
+    SUB
+    $SendParameters$_constructor_to_bounce_value INLINECALLDICT
+    $global_send INLINECALLDICT
+  }>
+  $RetentionMain$_internal_text_aea84646a207ae33db639dd9c8e236a66acfba16619c5b8845856db8f85336aa PROCINLINE:<{
+    $RetentionMain$_fun_onlyOwner INLINECALLDICT
+    s0 s7 XCHG
+    100000000 PUSHINT
+    SUB
+    s0 s7 XCHG
+  }>
+  $RetentionMain$_internal_text_4173e3c81e3ba6640260d86432fae0b3fe18f46e2b7abfc90809c64b332ececb PROCINLINE:<{
+    $RetentionMain$_fun_onlyOwner INLINECALLDICT
+    s0 s7 XCHG
+    100000000 PUSHINT
+    ADD
+    s0 s7 XCHG
+  }>
+  %$RetentionMain$_internal_empty PROCINLINE:<{
+  }>
+  $RetentionMain$_internal_binary_Deploy PROCINLINE:<{
+    $DeployOk$_constructor_queryId INLINECALLDICT
+    $DeployOk$_store_cell INLINECALLDICT
+    $RetentionMain$_fun_notify INLINECALLDICT
+  }>
+  $RetentionMain$_internal_text_6c8f44f45fedb4cdfed4de8db14aa5b13ad55d430f759d0669210b74c48fe3df PROCINLINE:<{
+    $RetentionMain$_fun_requireOwner INLINECALLDICT
+    $RetentionMain$_fun_requireStopped INLINECALLDICT
+    DROP
+    FALSE
+    B{b5ee9c7241010101000d00001600000000526573756d656412d9e98a} B>boc PUSHREF
+    $RetentionMain$_fun_reply INLINECALLDICT
+  }>
+  $RetentionMain$_internal_text_bcfaf776907c719cc8d379d8f194aaaa27e8ca2871cd591781721f215a454501 PROCINLINE:<{
+    $RetentionMain$_fun_requireOwner INLINECALLDICT
+    $RetentionMain$_fun_requireNotStopped INLINECALLDICT
+    DROP
+    TRUE
+    B{b5ee9c7241010101000d0000160000000053746f707065646f94ddb2} B>boc PUSHREF
+    $RetentionMain$_fun_reply INLINECALLDICT
+  }>
+  %nextIndex PROC:<{
+    $RetentionMain$_contract_load INLINECALLDICT
+    $RetentionMain$_fun_nextIndex INLINECALLDICT
+    8 1 BLKDROP2
+  }>
+  %currentLocked PROC:<{
+    $RetentionMain$_contract_load INLINECALLDICT
+    $RetentionMain$_fun_currentLocked INLINECALLDICT
+    8 1 BLKDROP2
+  }>
+  %allTimeLocked PROC:<{
+    $RetentionMain$_contract_load INLINECALLDICT
+    $RetentionMain$_fun_allTimeLocked INLINECALLDICT
+    8 1 BLKDROP2
+  }>
+  %allTimeRefunded PROC:<{
+    $RetentionMain$_contract_load INLINECALLDICT
+    $RetentionMain$_fun_allTimeRefunded INLINECALLDICT
+    8 1 BLKDROP2
+  }>
+  %commission PROC:<{
+    $RetentionMain$_contract_load INLINECALLDICT
+    $RetentionMain$_fun_commission INLINECALLDICT
+    8 1 BLKDROP2
+  }>
+  %stopped PROC:<{
+    $RetentionMain$_contract_load INLINECALLDICT
+    $RetentionMain$_fun_stopped INLINECALLDICT
+    8 1 BLKDROP2
+  }>
+  %owner PROC:<{
+    $RetentionMain$_contract_load INLINECALLDICT
+    $RetentionMain$_fun_owner INLINECALLDICT
+    8 1 BLKDROP2
+  }>
+  supported_interfaces PROC:<{
+    123515602279859691144772641439386770278 PUSHINT
+    209801025412363888721030803524359905849 PUSHINT
+    42980537499636128163026532310500881091 PUSHINT
+    209474421377847335869795010607481022628 PUSHINT
+    217874028807501790313347176103815139787 PUSHINT
+    192989407141549587419771644724066226057 PUSHINT
+    86142586315491086060343270784266291122 PUSHINT
+  }>
+  get_abi_ipfs PROC:<{
+    x{697066733a2f2f516d62373357616134337633646b797369344c6d74554e6e653336576a48446132447a447a516465525167364241} PUSHSLICE
+  }>
+  lazy_deployment_completed PROC:<{
+    c4 PUSH
+    CTOS
+    1 LDI
+    SWAP
+  }>
+  $RetentionMain$_contract_router_internal PROCREF:<{
+    c2 SAVE
+    SAMEALTSAVE
+    SWAP
+    IFJMP:<{
+      DROP
+      TRUE
+    }>
+    0 PUSHINT
+    OVER
+    SBITS
+    31 GTINT
+    IF:<{
+      DROP
+      DUP
+      32 PLDU
+    }>
+    DUP
+    2340115651 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      $CreateRetentionContract$_load INLINECALLDICT
+      1 4 BLKDROP2
+      $RetentionMain$_internal_binary_CreateRetentionContract INLINECALLDICT
+      TRUE
+    }>
+    DUP
+    1223691349 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      $InternalReplyFromRetentionRefund$_load INLINECALLDICT
+      1 4 BLKDROP2
+      $RetentionMain$_internal_binary_InternalReplyFromRetentionRefund INLINECALLDICT
+      TRUE
+    }>
+    DUP
+    1985343089 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      $RefundIfPossible$_load INLINECALLDICT
+      1 2 BLKDROP2
+      $RetentionMain$_internal_binary_RefundIfPossible INLINECALLDICT
+      TRUE
+    }>
+    DUP
+    3589743355 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      $InternalAskForRefundCompleted$_load INLINECALLDICT
+      1 4 BLKDROP2
+      $RetentionMain$_internal_binary_InternalAskForRefundCompleted INLINECALLDICT
+      TRUE
+    }>
+    DUP
+    0 EQINT
+    s2 PUSH
+    SBITS
+    33 LESSINT
+    AND
+    IFJMP:<{
+      2DROP
+      %$RetentionMain$_internal_empty INLINECALLDICT
+      TRUE
+    }>
+    DUP
+    2490013878 PUSHINT
+    EQUAL
+    IFJMP:<{
+      DROP
+      $Deploy$_load INLINECALLDICT
+      NIP
+      $RetentionMain$_internal_binary_Deploy INLINECALLDICT
+      TRUE
+    }>
+    0 EQINT
+    IF:<{
+      HASHSU
+      DUP
+      86254957005153482593167742035089344693437782575091241529406133056369733950700 PUSHINT
+      EQUAL
+      IFJMP:<{
+        DROP
+        $RetentionMain$_internal_text_beb2935a82089b154d32f99c4377aa960aa115366cc2c602755e36b97f505cec INLINECALLDICT
+        TRUE
+        RETALT
+      }>
+      DUP
+      78999750986875413000351175587803631135414379819235021254882339568152218908330 PUSHINT
+      EQUAL
+      IFJMP:<{
+        DROP
+        $RetentionMain$_internal_text_aea84646a207ae33db639dd9c8e236a66acfba16619c5b8845856db8f85336aa INLINECALLDICT
+        TRUE
+        RETALT
+      }>
+      DUP
+      29605094661955791652036895961233146655189283171778022053714380534272498781899 PUSHINT
+      EQUAL
+      IFJMP:<{
+        DROP
+        $RetentionMain$_internal_text_4173e3c81e3ba6640260d86432fae0b3fe18f46e2b7abfc90809c64b332ececb INLINECALLDICT
+        TRUE
+        RETALT
+      }>
+      DUP
+      49102922684337101841979563583256198294100324132395678439113188049283630228447 PUSHINT
+      EQUAL
+      IFJMP:<{
+        DROP
+        $RetentionMain$_internal_text_6c8f44f45fedb4cdfed4de8db14aa5b13ad55d430f759d0669210b74c48fe3df INLINECALLDICT
+        TRUE
+        RETALT
+      }>
+      85478235227686204299312064008631277118150318603456584517510472216578858763521 PUSHINT
+      EQUAL
+      IFJMP:<{
+        $RetentionMain$_internal_text_bcfaf776907c719cc8d379d8f194aaaa27e8ca2871cd591781721f215a454501 INLINECALLDICT
+        TRUE
+        RETALT
+      }>
+    }>ELSE<{
+      DROP
+    }>
+    FALSE
+  }>
+  recv_internal PROC:<{
+    SWAP
+    CTOS
+    4 LDU
+    SWAP
+    1 PUSHINT
+    AND
+    NEGATE
+    SWAP
+    LDMSGADDR
+    SWAP
+    __tact_verify_address INLINECALLDICT
+    s0 s4 s2 PUXCPU
+    s0 s3 XCHG
+    4 TUPLE
+    __tact_context SETGLOB
+    s0 s2 XCHG
+    __tact_context_sender SETGLOB
+    $RetentionMain$_contract_load INLINECALLDICT
+    2 8 BLKSWAP
+    $RetentionMain$_contract_router_internal INLINECALLDICT
+    130 THROWIFNOT
+    $RetentionMain$_contract_store INLINECALLDICT
+  }>
+}END>c

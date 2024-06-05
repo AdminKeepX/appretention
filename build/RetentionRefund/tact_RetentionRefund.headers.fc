@@ -1,0 +1,121 @@
+;;
+;; Header files for RetentionRefund
+;; NOTE: declarations are sorted for optimal order
+;;
+
+;; __tact_verify_address
+slice __tact_verify_address(slice address) inline;
+
+;; __tact_load_address
+(slice, slice) __tact_load_address(slice cs) inline;
+
+;; __tact_load_address_opt
+(slice, slice) __tact_load_address_opt(slice cs) inline;
+
+;; __tact_store_address
+builder __tact_store_address(builder b, slice address) inline;
+
+;; __tact_store_address_opt
+builder __tact_store_address_opt(builder b, slice address) inline;
+
+;; __tact_my_balance
+int __tact_my_balance() inline;
+
+;; __tact_not_null
+forall X -> X __tact_not_null(X x) inline;
+
+;; __tact_context_get
+(int, slice, int, slice) __tact_context_get() inline;
+
+;; __tact_context_get_sender
+slice __tact_context_get_sender() inline;
+
+;; __tact_store_bool
+builder __tact_store_bool(builder b, int v) inline;
+
+;; __tact_slice_eq_bits
+int __tact_slice_eq_bits(slice a, slice b) inline;
+
+;; __tact_int_to_string
+slice __tact_int_to_string(int src) inline_ref;
+
+;; $Deploy$_load
+(slice, ((int))) $Deploy$_load(slice sc_0) inline;
+
+;; $DeployOk$_store
+builder $DeployOk$_store(builder build_0, (int) v) inline;
+
+;; $DeployOk$_store_cell
+cell $DeployOk$_store_cell((int) v) inline;
+
+;; $InternalAskForRefund$_load
+(slice, ((slice, int, int))) $InternalAskForRefund$_load(slice sc_0) inline;
+
+;; $InternalCreateRefund$_load
+(slice, ((int, int, slice))) $InternalCreateRefund$_load(slice sc_0) inline;
+
+;; $InternalReplyFromRetentionRefund$_store
+builder $InternalReplyFromRetentionRefund$_store(builder build_0, (int, int, slice, slice) v) inline;
+
+;; $InternalReplyFromRetentionRefund$_store_cell
+cell $InternalReplyFromRetentionRefund$_store_cell((int, int, slice, slice) v) inline;
+
+;; $InternalAskForRefundCompleted$_store
+builder $InternalAskForRefundCompleted$_store(builder build_0, (int, slice, slice, int) v) inline;
+
+;; $InternalAskForRefundCompleted$_store_cell
+cell $InternalAskForRefundCompleted$_store_cell((int, slice, slice, int) v) inline;
+
+;; $RetentionRefund$_store
+builder $RetentionRefund$_store(builder build_0, (slice, slice, int, int, int, int, int) v) inline;
+
+;; $RetentionRefund$_load
+(slice, ((slice, slice, int, int, int, int, int))) $RetentionRefund$_load(slice sc_0) inline;
+
+;; $StateInit$_not_null
+((cell, cell)) $StateInit$_not_null(tuple v) inline;
+
+;; $RetentionRefund$init$_load
+(slice, ((int, int, slice))) $RetentionRefund$init$_load(slice sc_0) inline;
+
+;; $RetentionRefund$_contract_init
+(slice, slice, int, int, int, int, int) $RetentionRefund$_contract_init(int $hash, int $memo, slice $parent) impure inline_ref;
+
+;; $RetentionRefund$_contract_load
+(slice, slice, int, int, int, int, int) $RetentionRefund$_contract_load() impure inline_ref;
+
+;; $RetentionRefund$_contract_store
+() $RetentionRefund$_contract_store((slice, slice, int, int, int, int, int) v) impure inline;
+
+;; $global_send
+() $global_send((int, slice, int, int, cell, cell, cell) $params) impure inline_ref;
+
+;; $RetentionRefund$_fun_contractBalance
+((slice, slice, int, int, int, int, int), slice) $RetentionRefund$_fun_contractBalance((slice, slice, int, int, int, int, int) $self) impure inline_ref;
+
+;; $SendParameters$_constructor_bounce_to_value_mode_body_code_data
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int bounce, slice to, int value, int mode, cell body, cell code, cell data) inline;
+
+;; $RetentionRefund$_fun_forward
+((slice, slice, int, int, int, int, int), ()) $RetentionRefund$_fun_forward((slice, slice, int, int, int, int, int) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref;
+
+;; $RetentionRefund$_fun_notify
+((slice, slice, int, int, int, int, int), ()) $RetentionRefund$_fun_notify((slice, slice, int, int, int, int, int) $self, cell $body) impure inline;
+
+;; $SendParameters$_constructor_to_value_bounce_mode_body
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_value_bounce_mode_body(slice to, int value, int bounce, int mode, cell body) inline;
+
+;; $InternalReplyFromRetentionRefund$_constructor_locked_index_contractAddress_creatorAddress
+((int, int, slice, slice)) $InternalReplyFromRetentionRefund$_constructor_locked_index_contractAddress_creatorAddress(int locked, int index, slice contractAddress, slice creatorAddress) inline;
+
+;; $SendParameters$_constructor_to_value_mode_body
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_value_mode_body(slice to, int value, int mode, cell body) inline;
+
+;; $InternalAskForRefundCompleted$_constructor_amount_creator_contractAddress_index
+((int, slice, slice, int)) $InternalAskForRefundCompleted$_constructor_amount_creator_contractAddress_index(int amount, slice creator, slice contractAddress, int index) inline;
+
+;; $SendParameters$_constructor_to_bounce_value_mode_body
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_bounce_value_mode_body(slice to, int bounce, int value, int mode, cell body) inline;
+
+;; $DeployOk$_constructor_queryId
+((int)) $DeployOk$_constructor_queryId(int queryId) inline;

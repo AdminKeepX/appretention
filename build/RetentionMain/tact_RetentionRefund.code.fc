@@ -1,0 +1,151 @@
+#pragma version =0.4.4;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+#include "tact_RetentionRefund.headers.fc";
+#include "tact_RetentionRefund.stdlib.fc";
+#include "tact_RetentionRefund.constants.fc";
+#include "tact_RetentionRefund.storage.fc";
+
+;;
+;; Contract RetentionRefund functions
+;;
+
+(slice, slice, int, int, int, int, int) $RetentionRefund$_contract_init(int $hash, int $memo, slice $parent) impure inline_ref {
+    var (($self'parent, $self'creator, $self'expiration, $self'hash, $self'memo, $self'locked, $self'index)) = (null(), null(), 0, null(), null(), 0, 0);
+    $self'parent = $parent;
+    $self'hash = $hash;
+    $self'memo = $memo;
+    return ($self'parent, $self'creator, $self'expiration, $self'hash, $self'memo, $self'locked, $self'index);
+}
+
+((slice, slice, int, int, int, int, int), slice) $RetentionRefund$_fun_contractBalance((slice, slice, int, int, int, int, int) $self) impure inline_ref {
+    var (($self'parent, $self'creator, $self'expiration, $self'hash, $self'memo, $self'locked, $self'index)) = $self;
+    return (($self'parent, $self'creator, $self'expiration, $self'hash, $self'memo, $self'locked, $self'index), __tact_int_to_string(__tact_my_balance()));
+}
+
+;;
+;; Receivers of a Contract RetentionRefund
+;;
+
+(((slice, slice, int, int, int, int, int)), ()) $RetentionRefund$_internal_binary_InternalCreateRefund((slice, slice, int, int, int, int, int) $self, (int, int, slice) $msg) impure inline {
+    var ($self'parent, $self'creator, $self'expiration, $self'hash, $self'memo, $self'locked, $self'index) = $self;
+    var ($msg'index, $msg'expiration, $msg'creator) = $msg;
+    var ($ctx'bounced, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+    $self'creator = $msg'creator;
+    $self'expiration = $msg'expiration;
+    $self'locked = ((($ctx'value - 40000000) - 30000000) - 50000000);
+    $self'index = $msg'index;
+    $global_send($SendParameters$_constructor_to_value_bounce_mode_body(__tact_context_get_sender(), 40000000, true, (2 | 1), $InternalReplyFromRetentionRefund$_store_cell($InternalReplyFromRetentionRefund$_constructor_locked_index_contractAddress_creatorAddress((((__tact_my_balance() - 40000000) - 30000000) - 50000000), $msg'index, my_address(), __tact_not_null($self'creator)))));
+    return (($self'parent, $self'creator, $self'expiration, $self'hash, $self'memo, $self'locked, $self'index), ());
+}
+
+(((slice, slice, int, int, int, int, int)), ()) $RetentionRefund$_internal_binary_InternalAskForRefund((slice, slice, int, int, int, int, int) $self, (slice, int, int) $msg) impure inline {
+    var ($self'parent, $self'creator, $self'expiration, $self'hash, $self'memo, $self'locked, $self'index) = $self;
+    var ($msg'toAddress, $msg'secret, $msg'memo) = $msg;
+    throw_unless(57871, ( __tact_slice_eq_bits($self'parent, __tact_context_get_sender()) ));
+    throw_unless(57871, (now() > $self'expiration));
+    throw_unless(57871, ($self'hash == $msg'secret));
+    throw_unless(57871, ($self'memo == $msg'memo));
+    $global_send($SendParameters$_constructor_to_value_mode_body(__tact_context_get_sender(), 30000000, (2 | 1), $InternalAskForRefundCompleted$_store_cell($InternalAskForRefundCompleted$_constructor_amount_creator_contractAddress_index($self'locked, __tact_not_null($self'creator), my_address(), $self'index))));
+    $global_send($SendParameters$_constructor_to_bounce_value_mode_body($msg'toAddress, true, __tact_my_balance(), (128 | 32), __gen_cell_comment_37e90db9d1f7725dc0128ee6bad2035fb50479e09a488a29257bed01a23050a0()));
+    return (($self'parent, $self'creator, $self'expiration, $self'hash, $self'memo, $self'locked, $self'index), ());
+}
+
+(((slice, slice, int, int, int, int, int)), ()) $RetentionRefund$_internal_binary_Deploy((slice, slice, int, int, int, int, int) $self, (int) $deploy) impure inline {
+    var ($self'parent, $self'creator, $self'expiration, $self'hash, $self'memo, $self'locked, $self'index) = $self;
+    var ($deploy'queryId) = $deploy;
+    ($self'parent, $self'creator, $self'expiration, $self'hash, $self'memo, $self'locked, $self'index)~$RetentionRefund$_fun_notify($DeployOk$_store_cell($DeployOk$_constructor_queryId($deploy'queryId)));
+    return (($self'parent, $self'creator, $self'expiration, $self'hash, $self'memo, $self'locked, $self'index), ());
+}
+
+;;
+;; Get methods of a Contract RetentionRefund
+;;
+
+_ %contractBalance() method_id(110221) {
+    var self = $RetentionRefund$_contract_load();
+    var res = self~$RetentionRefund$_fun_contractBalance();
+    return res;
+}
+
+_ supported_interfaces() method_id {
+    return (
+        "org.ton.introspection.v0"H >> 128,
+        "org.ton.abi.ipfs.v0"H >> 128,
+        "org.ton.deploy.lazy.v0"H >> 128,
+        "org.ton.chain.workchain.v0"H >> 128
+    );
+}
+
+_ get_abi_ipfs() method_id {
+    return "ipfs://QmYzcz3NVYp4FfNZiifP1X4CBCfgfKq9KmWys41c4pvbVq";
+}
+
+_ lazy_deployment_completed() method_id {
+    return get_data().begin_parse().load_int(1);
+}
+
+;;
+;; Routing of a Contract RetentionRefund
+;;
+
+((slice, slice, int, int, int, int, int), int) $RetentionRefund$_contract_router_internal((slice, slice, int, int, int, int, int) self, int msg_bounced, slice in_msg) impure inline_ref {
+    ;; Handle bounced messages
+    if (msg_bounced) {
+        return (self, true);
+    }
+    
+    ;; Parse incoming message
+    int op = 0;
+    if (slice_bits(in_msg) >= 32) {
+        op = in_msg.preload_uint(32);
+    }
+    
+    
+    ;; Receive InternalCreateRefund message
+    if (op == 1772334149) {
+        var msg = in_msg~$InternalCreateRefund$_load();
+        self~$RetentionRefund$_internal_binary_InternalCreateRefund(msg);
+        return (self, true);
+    }
+    
+    ;; Receive InternalAskForRefund message
+    if (op == 1536850620) {
+        var msg = in_msg~$InternalAskForRefund$_load();
+        self~$RetentionRefund$_internal_binary_InternalAskForRefund(msg);
+        return (self, true);
+    }
+    
+    ;; Receive Deploy message
+    if (op == 2490013878) {
+        var msg = in_msg~$Deploy$_load();
+        self~$RetentionRefund$_internal_binary_Deploy(msg);
+        return (self, true);
+    }
+    
+    return (self, false);
+}
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    var msg_flags = cs~load_uint(4);
+    var msg_bounced = -(msg_flags & 1);
+    slice msg_sender_addr = __tact_verify_address(cs~load_msg_addr());
+    __tact_context = (msg_bounced, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var self = $RetentionRefund$_contract_load();
+    
+    ;; Handle operation
+    int handled = self~$RetentionRefund$_contract_router_internal(msg_bounced, in_msg);
+    
+    ;; Throw if not handled
+    throw_unless(130, handled);
+    
+    ;; Persist state
+    $RetentionRefund$_contract_store(self);
+}

@@ -12,6 +12,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import ContentContainer from "../components/ContentContainer";
 import { styled } from '@mui/system';
+import { useMainContract } from '../hooks/useMainContract';
 
 const FormRow = styled(Box)`
   display: flex;
@@ -84,6 +85,8 @@ const CreateTab: React.FC = () => {
 
     const [secret, setSecret] = useState('');
     const [memo, setMemo] = useState('');
+    const {createRefund} = useMainContract();
+
 
     return (
       <ContentContainer>
@@ -138,6 +141,7 @@ const CreateTab: React.FC = () => {
                     helperText={amountHelperText}
                 />
             <Button
+                onClick={createRefund}
                 variant="contained"
                 sx={{
                     height: '50px',

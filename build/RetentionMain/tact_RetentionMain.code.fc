@@ -1,0 +1,372 @@
+#pragma version =0.4.4;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+#include "tact_RetentionMain.headers.fc";
+#include "tact_RetentionMain.stdlib.fc";
+#include "tact_RetentionMain.constants.fc";
+#include "tact_RetentionMain.storage.fc";
+
+;;
+;; Contract RetentionMain functions
+;;
+
+(int, int, int, int, int, slice, int, int) $RetentionMain$_contract_init(int $val, slice $owner) impure inline_ref {
+    var (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)) = (null(), 0, 0, 0, 0, null(), null(), null());
+    $self'val = $val;
+    $self'owner = $owner;
+    $self'current_locked = 0;
+    $self'all_time_locked = 0;
+    $self'all_time_refunded = 0;
+    $self'next_index = 0;
+    $self'stopped = false;
+    $self'commissionCost = 1000000000;
+    return ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped);
+}
+
+((int, int, int, int, int, slice, int, int), ()) $RetentionMain$_fun_onlyOwner((int, int, int, int, int, slice, int, int) $self) impure inline_ref {
+    var (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)) = $self;
+    throw_unless(7184, ( __tact_slice_eq_bits($self'owner, __tact_context_get_sender()) ));
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+((int, int, int, int, int, slice, int, int), int) $RetentionMain$_fun_nextIndex((int, int, int, int, int, slice, int, int) $self) impure inline_ref {
+    var (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)) = $self;
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), $self'next_index);
+}
+
+((int, int, int, int, int, slice, int, int), int) $RetentionMain$_fun_currentLocked((int, int, int, int, int, slice, int, int) $self) impure inline_ref {
+    var (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)) = $self;
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), $self'current_locked);
+}
+
+((int, int, int, int, int, slice, int, int), int) $RetentionMain$_fun_allTimeLocked((int, int, int, int, int, slice, int, int) $self) impure inline_ref {
+    var (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)) = $self;
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), $self'all_time_locked);
+}
+
+((int, int, int, int, int, slice, int, int), int) $RetentionMain$_fun_allTimeRefunded((int, int, int, int, int, slice, int, int) $self) impure inline_ref {
+    var (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)) = $self;
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), $self'all_time_refunded);
+}
+
+((int, int, int, int, int, slice, int, int), int) $RetentionMain$_fun_commission((int, int, int, int, int, slice, int, int) $self) impure inline_ref {
+    var (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)) = $self;
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), $self'commissionCost);
+}
+
+((int, int, int, int, int, slice, int, int), ()) $RetentionMain$_fun_requireNotStopped((int, int, int, int, int, slice, int, int) $self) impure inline_ref {
+    var (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)) = $self;
+    throw_unless(40368, (~ $self'stopped));
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+((int, int, int, int, int, slice, int, int), ()) $RetentionMain$_fun_requireStopped((int, int, int, int, int, slice, int, int) $self) impure inline_ref {
+    var (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)) = $self;
+    throw_unless(53296, $self'stopped);
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+((int, int, int, int, int, slice, int, int), int) $RetentionMain$_fun_stopped((int, int, int, int, int, slice, int, int) $self) impure inline_ref {
+    var (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)) = $self;
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), $self'stopped);
+}
+
+((int, int, int, int, int, slice, int, int), ()) $RetentionMain$_fun_requireOwner((int, int, int, int, int, slice, int, int) $self) impure inline_ref {
+    var (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)) = $self;
+    throw_unless(132, ( __tact_slice_eq_bits($self'owner, __tact_context_get_sender()) ));
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+((int, int, int, int, int, slice, int, int), slice) $RetentionMain$_fun_owner((int, int, int, int, int, slice, int, int) $self) impure inline_ref {
+    var (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)) = $self;
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), $self'owner);
+}
+
+;;
+;; Receivers of a Contract RetentionMain
+;;
+
+(((int, int, int, int, int, slice, int, int)), ()) $RetentionMain$_internal_binary_CreateRetentionContract((int, int, int, int, int, slice, int, int) $self, (int, slice, slice, int) $msg) impure inline {
+    var ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped) = $self;
+    var ($msg'contractId, $msg'secret, $msg'memo, $msg'expiration) = $msg;
+    var ($ctx'bounced, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+    slice $user_address = __tact_context_get_sender();
+    int $hashSecret = string_hash($msg'secret);
+    int $hashMemo = string_hash($msg'memo);
+    int $toSend = ($ctx'value - $self'commissionCost);
+    var ($refund_init'code, $refund_init'data) = $RetentionRefund$_init_child(__tact_context_sys, $hashSecret, $hashMemo, my_address());
+    slice $refund_address = $global_contractAddress(($refund_init'code, $refund_init'data));
+    $global_send($SendParameters$_constructor_to_value_mode_bounce_data_code_body($refund_address, $toSend, (2 | 1), false, $refund_init'data, $refund_init'code, $InternalCreateRefund$_store_cell($InternalCreateRefund$_constructor_index_expiration_creator($self'next_index, $msg'expiration, $user_address))));
+    $self'next_index = ($self'next_index + 1);
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+(((int, int, int, int, int, slice, int, int)), ()) $RetentionMain$_internal_binary_InternalReplyFromRetentionRefund((int, int, int, int, int, slice, int, int) $self, (int, int, slice, slice) $msg) impure inline {
+    var ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped) = $self;
+    var ($msg'locked, $msg'index, $msg'contractAddress, $msg'creatorAddress) = $msg;
+    var ($user_contract_init'code, $user_contract_init'data) = $RetentionUser$_init_child(__tact_context_sys, ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)~$RetentionMain$_fun_owner(), $msg'creatorAddress);
+    slice $user_contract_address = $global_contractAddress(($user_contract_init'code, $user_contract_init'data));
+    $self'all_time_locked = ($self'all_time_locked + $msg'locked);
+    $global_send($SendParameters$_constructor_to_value_mode_bounce_data_code_body($user_contract_address, 50000000, (2 | 1), false, $user_contract_init'data, $user_contract_init'code, $InternalRefundContractCreated$_store_cell($InternalRefundContractCreated$_constructor_contract_amount_index($msg'contractAddress, $msg'locked, $msg'index))));
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+(((int, int, int, int, int, slice, int, int)), ()) $RetentionMain$_internal_binary_RefundIfPossible((int, int, int, int, int, slice, int, int) $self, (slice, slice) $msg) impure inline {
+    var ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped) = $self;
+    var ($msg'memo, $msg'secret) = $msg;
+    var ($ctx'bounced, $ctx'sender, $ctx'value, $ctx'raw) = __tact_context_get();
+    int $hashCode = string_hash($msg'secret);
+    int $hashMemo = string_hash($msg'memo);
+    var ($refund_init'code, $refund_init'data) = $RetentionRefund$_init_child(__tact_context_sys, $hashCode, $hashMemo, my_address());
+    slice $refund_address = $global_contractAddress(($refund_init'code, $refund_init'data));
+    $global_send($SendParameters$_constructor_to_value_mode_bounce_body($refund_address, $ctx'value, (2 | 1), false, $InternalAskForRefund$_store_cell($InternalAskForRefund$_constructor_toAddress_secret_memo(__tact_context_get_sender(), $hashCode, $hashMemo))));
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+(((int, int, int, int, int, slice, int, int)), ()) $RetentionMain$_internal_binary_InternalAskForRefundCompleted((int, int, int, int, int, slice, int, int) $self, (int, slice, slice, int) $msg) impure inline {
+    var ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped) = $self;
+    var ($msg'amount, $msg'creator, $msg'contractAddress, $msg'index) = $msg;
+    var ($user_contract_init'code, $user_contract_init'data) = $RetentionUser$_init_child(__tact_context_sys, ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)~$RetentionMain$_fun_owner(), $msg'creator);
+    slice $user_contract_address = $global_contractAddress(($user_contract_init'code, $user_contract_init'data));
+    $global_send($SendParameters$_constructor_to_value_mode_bounce_body($user_contract_address, 41000000, (2 | 1), false, $InternalRefundContractClosed$_store_cell($InternalRefundContractClosed$_constructor_contract_amount_index($msg'contractAddress, $msg'amount, $msg'index))));
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+((int, int, int, int, int, slice, int, int), ()) $RetentionMain$_internal_text_beb2935a82089b154d32f99c4377aa960aa115366cc2c602755e36b97f505cec((int, int, int, int, int, slice, int, int) $self) impure inline {
+    var ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped) = $self;
+    ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)~$RetentionMain$_fun_onlyOwner();
+    $global_send($SendParameters$_constructor_to_bounce_value(__tact_context_get_sender(), true, ((__tact_my_balance() - $Context$_get_value(__tact_context_get())) - 1000000000)));
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+((int, int, int, int, int, slice, int, int), ()) $RetentionMain$_internal_text_aea84646a207ae33db639dd9c8e236a66acfba16619c5b8845856db8f85336aa((int, int, int, int, int, slice, int, int) $self) impure inline {
+    var ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped) = $self;
+    ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)~$RetentionMain$_fun_onlyOwner();
+    int $new_price = ($self'commissionCost - 100000000);
+    $self'commissionCost = $new_price;
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+((int, int, int, int, int, slice, int, int), ()) $RetentionMain$_internal_text_4173e3c81e3ba6640260d86432fae0b3fe18f46e2b7abfc90809c64b332ececb((int, int, int, int, int, slice, int, int) $self) impure inline {
+    var ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped) = $self;
+    ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)~$RetentionMain$_fun_onlyOwner();
+    int $new_price = ($self'commissionCost + 100000000);
+    $self'commissionCost = $new_price;
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+(((int, int, int, int, int, slice, int, int)), ()) %$RetentionMain$_internal_empty((int, int, int, int, int, slice, int, int) $self) impure inline {
+    var ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped) = $self;
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+(((int, int, int, int, int, slice, int, int)), ()) $RetentionMain$_internal_binary_Deploy((int, int, int, int, int, slice, int, int) $self, (int) $deploy) impure inline {
+    var ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped) = $self;
+    var ($deploy'queryId) = $deploy;
+    ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)~$RetentionMain$_fun_notify($DeployOk$_store_cell($DeployOk$_constructor_queryId($deploy'queryId)));
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+((int, int, int, int, int, slice, int, int), ()) $RetentionMain$_internal_text_6c8f44f45fedb4cdfed4de8db14aa5b13ad55d430f759d0669210b74c48fe3df((int, int, int, int, int, slice, int, int) $self) impure inline {
+    var ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped) = $self;
+    ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)~$RetentionMain$_fun_requireOwner();
+    ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)~$RetentionMain$_fun_requireStopped();
+    $self'stopped = false;
+    ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)~$RetentionMain$_fun_reply(__gen_cell_comment_514f593ead485926515219a03034c6b162f1c29390f83f2f1bd70b8b77731ec3());
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+((int, int, int, int, int, slice, int, int), ()) $RetentionMain$_internal_text_bcfaf776907c719cc8d379d8f194aaaa27e8ca2871cd591781721f215a454501((int, int, int, int, int, slice, int, int) $self) impure inline {
+    var ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped) = $self;
+    ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)~$RetentionMain$_fun_requireOwner();
+    ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)~$RetentionMain$_fun_requireNotStopped();
+    $self'stopped = true;
+    ($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped)~$RetentionMain$_fun_reply(__gen_cell_comment_8f4b6a166554b4f282855d0333c627d5b58d281ea4ba11e4def91a1053193b2d());
+    return (($self'commissionCost, $self'current_locked, $self'all_time_locked, $self'all_time_refunded, $self'next_index, $self'owner, $self'val, $self'stopped), ());
+}
+
+;;
+;; Get methods of a Contract RetentionMain
+;;
+
+_ %nextIndex() method_id(70866) {
+    var self = $RetentionMain$_contract_load();
+    var res = self~$RetentionMain$_fun_nextIndex();
+    return res;
+}
+
+_ %currentLocked() method_id(105854) {
+    var self = $RetentionMain$_contract_load();
+    var res = self~$RetentionMain$_fun_currentLocked();
+    return res;
+}
+
+_ %allTimeLocked() method_id(100031) {
+    var self = $RetentionMain$_contract_load();
+    var res = self~$RetentionMain$_fun_allTimeLocked();
+    return res;
+}
+
+_ %allTimeRefunded() method_id(129520) {
+    var self = $RetentionMain$_contract_load();
+    var res = self~$RetentionMain$_fun_allTimeRefunded();
+    return res;
+}
+
+_ %commission() method_id(112356) {
+    var self = $RetentionMain$_contract_load();
+    var res = self~$RetentionMain$_fun_commission();
+    return res;
+}
+
+_ %stopped() method_id(74107) {
+    var self = $RetentionMain$_contract_load();
+    var res = self~$RetentionMain$_fun_stopped();
+    return res;
+}
+
+_ %owner() method_id(83229) {
+    var self = $RetentionMain$_contract_load();
+    var res = self~$RetentionMain$_fun_owner();
+    return res;
+}
+
+_ supported_interfaces() method_id {
+    return (
+        "org.ton.introspection.v0"H >> 128,
+        "org.ton.abi.ipfs.v0"H >> 128,
+        "org.ton.deploy.lazy.v0"H >> 128,
+        "org.ton.chain.workchain.v0"H >> 128,
+        "org.ton.resumable"H >> 128,
+        "org.ton.stoppable"H >> 128,
+        "org.ton.ownable"H >> 128
+    );
+}
+
+_ get_abi_ipfs() method_id {
+    return "ipfs://Qmb73Waa43v3dkysi4LmtUNne36WjHDa2DzDzQdeRQg6BA";
+}
+
+_ lazy_deployment_completed() method_id {
+    return get_data().begin_parse().load_int(1);
+}
+
+;;
+;; Routing of a Contract RetentionMain
+;;
+
+((int, int, int, int, int, slice, int, int), int) $RetentionMain$_contract_router_internal((int, int, int, int, int, slice, int, int) self, int msg_bounced, slice in_msg) impure inline_ref {
+    ;; Handle bounced messages
+    if (msg_bounced) {
+        return (self, true);
+    }
+    
+    ;; Parse incoming message
+    int op = 0;
+    if (slice_bits(in_msg) >= 32) {
+        op = in_msg.preload_uint(32);
+    }
+    
+    
+    ;; Receive CreateRetentionContract message
+    if (op == 2340115651) {
+        var msg = in_msg~$CreateRetentionContract$_load();
+        self~$RetentionMain$_internal_binary_CreateRetentionContract(msg);
+        return (self, true);
+    }
+    
+    ;; Receive InternalReplyFromRetentionRefund message
+    if (op == 1223691349) {
+        var msg = in_msg~$InternalReplyFromRetentionRefund$_load();
+        self~$RetentionMain$_internal_binary_InternalReplyFromRetentionRefund(msg);
+        return (self, true);
+    }
+    
+    ;; Receive RefundIfPossible message
+    if (op == 1985343089) {
+        var msg = in_msg~$RefundIfPossible$_load();
+        self~$RetentionMain$_internal_binary_RefundIfPossible(msg);
+        return (self, true);
+    }
+    
+    ;; Receive InternalAskForRefundCompleted message
+    if (op == 3589743355) {
+        var msg = in_msg~$InternalAskForRefundCompleted$_load();
+        self~$RetentionMain$_internal_binary_InternalAskForRefundCompleted(msg);
+        return (self, true);
+    }
+    
+    ;; Receive empty message
+    if ((op == 0) & (slice_bits(in_msg) <= 32)) {
+        self~%$RetentionMain$_internal_empty();
+        return (self, true);
+    }
+    
+    ;; Receive Deploy message
+    if (op == 2490013878) {
+        var msg = in_msg~$Deploy$_load();
+        self~$RetentionMain$_internal_binary_Deploy(msg);
+        return (self, true);
+    }
+    
+    ;; Text Receivers
+    if (op == 0) {
+        var text_op = slice_hash(in_msg);
+        
+        ;; Receive "withdraw safe" message
+        if (text_op == 0xbeb2935a82089b154d32f99c4377aa960aa115366cc2c602755e36b97f505cec) {
+            self~$RetentionMain$_internal_text_beb2935a82089b154d32f99c4377aa960aa115366cc2c602755e36b97f505cec();
+            return (self, true);
+        }
+        
+        ;; Receive "decrease price" message
+        if (text_op == 0xaea84646a207ae33db639dd9c8e236a66acfba16619c5b8845856db8f85336aa) {
+            self~$RetentionMain$_internal_text_aea84646a207ae33db639dd9c8e236a66acfba16619c5b8845856db8f85336aa();
+            return (self, true);
+        }
+        
+        ;; Receive "increase price" message
+        if (text_op == 0x4173e3c81e3ba6640260d86432fae0b3fe18f46e2b7abfc90809c64b332ececb) {
+            self~$RetentionMain$_internal_text_4173e3c81e3ba6640260d86432fae0b3fe18f46e2b7abfc90809c64b332ececb();
+            return (self, true);
+        }
+        
+        ;; Receive "Resume" message
+        if (text_op == 0x6c8f44f45fedb4cdfed4de8db14aa5b13ad55d430f759d0669210b74c48fe3df) {
+            self~$RetentionMain$_internal_text_6c8f44f45fedb4cdfed4de8db14aa5b13ad55d430f759d0669210b74c48fe3df();
+            return (self, true);
+        }
+        
+        ;; Receive "Stop" message
+        if (text_op == 0xbcfaf776907c719cc8d379d8f194aaaa27e8ca2871cd591781721f215a454501) {
+            self~$RetentionMain$_internal_text_bcfaf776907c719cc8d379d8f194aaaa27e8ca2871cd591781721f215a454501();
+            return (self, true);
+        }
+    }
+    
+    return (self, false);
+}
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    var msg_flags = cs~load_uint(4);
+    var msg_bounced = -(msg_flags & 1);
+    slice msg_sender_addr = __tact_verify_address(cs~load_msg_addr());
+    __tact_context = (msg_bounced, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var self = $RetentionMain$_contract_load();
+    
+    ;; Handle operation
+    int handled = self~$RetentionMain$_contract_router_internal(msg_bounced, in_msg);
+    
+    ;; Throw if not handled
+    throw_unless(130, handled);
+    
+    ;; Persist state
+    $RetentionMain$_contract_store(self);
+}

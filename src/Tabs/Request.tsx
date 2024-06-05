@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, TextField, Button } from '@mui/material';
 import { styled } from '@mui/system';
+import { useRefundContract } from '../hooks/useRefundContract';
 
 const Container = styled(Box)`
   display: flex;
@@ -28,6 +29,7 @@ const SecretField = styled(TextField)`
 const Request: React.FC = () => {
   const [secret, setSecret] = useState('');
   const [memo, setMemo] = useState("");
+  const {requestRefund} = useRefundContract();
 
   const handleSecretChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -60,6 +62,7 @@ const Request: React.FC = () => {
         />
       </FormRow>
       <Button
+        onClick={requestRefund}
                 variant="contained"
                 sx={{
                     height: '50px',

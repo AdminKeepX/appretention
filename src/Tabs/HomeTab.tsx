@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Typography, Divider, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import EmptyScreen from '../components/EmptyScreen';
 import ContentContainer from '../components/ContentContainer';
+import { useMainContractAmount } from '../hooks/useMainContract';
 
 interface HomeTabProps {
   switchToCreateTab: () => void;
@@ -15,6 +16,8 @@ const HomeTab: React.FC<HomeTabProps> = ({ switchToCreateTab }) => {
     { id: 2, name: 'Contract 2', amount: 200, date: '2024-06-15' },
   ]);
 
+  const { address, countIndex, currentLocked, allTimeLocked, allTimeRefunded, commission } = useMainContractAmount();
+
   const getTotal = () => {
     return contracts.reduce((total, contract) => total + contract.amount, 0);
   };
@@ -25,6 +28,32 @@ const HomeTab: React.FC<HomeTabProps> = ({ switchToCreateTab }) => {
         <EmptyScreen onCreateContract={switchToCreateTab} />
       ) : (
         <Box>
+          <Typography variant="h4" gutterBottom>
+            Contract Info:
+          </Typography>
+          <Typography variant="h6" gutterBottom>
+            Address: {address}
+          </Typography>
+
+          <Typography variant="h6" gutterBottom>
+            Amount of contracts: {countIndex}
+          </Typography>
+
+          <Typography variant="h6" gutterBottom>
+            Current Locked: {currentLocked}
+          </Typography>
+           <Typography variant="h6" gutterBottom>
+            All time Locked: {allTimeLocked}
+          </Typography>
+          <Typography variant="h6" gutterBottom>
+            All Time Refunded: {allTimeRefunded}
+          </Typography>
+          <Typography variant="h6" gutterBottom>
+            Commission: {commission}
+          </Typography>
+          <Divider />
+          
+
           <Typography variant="h4" gutterBottom>
             My Contracts
           </Typography>

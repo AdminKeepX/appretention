@@ -1,0 +1,339 @@
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+((cell, cell)) $StateInit$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (cell vvv'code, cell vvv'data) = __tact_tuple_destroy_2(v);
+    return (vvv'code, vvv'data);
+}
+
+;;
+;; Type: Context
+;; TLB: _ bounced:bool sender:address value:int257 raw:^slice = Context
+;;
+
+_ $Context$_get_value((int, slice, int, slice) v) inline {
+    var (v'bounced, v'sender, v'value, v'raw) = v;
+    return v'value;
+}
+
+;;
+;; Type: SendParameters
+;; TLB: _ bounce:bool to:address value:int257 mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell = SendParameters
+;;
+
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int bounce, slice to, int value, int mode, cell body, cell code, cell data) inline {
+    return (bounce, to, value, mode, body, code, data);
+}
+
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_value_mode_bounce_data_code_body(slice to, int value, int mode, int bounce, cell data, cell code, cell body) inline {
+    return (bounce, to, value, mode, body, code, data);
+}
+
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_value_mode_bounce_body(slice to, int value, int mode, int bounce, cell body) inline {
+    return (bounce, to, value, mode, body, null(), null());
+}
+
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_bounce_value(slice to, int bounce, int value) inline {
+    return (bounce, to, value, 0, null(), null(), null());
+}
+
+;;
+;; Type: Deploy
+;; Header: 0x946a98b6
+;; TLB: deploy#946a98b6 queryId:uint64 = Deploy
+;;
+
+(slice, ((int))) $Deploy$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 2490013878);
+    var v'queryId = sc_0~load_uint(64);
+    return (sc_0, (v'queryId));
+}
+
+;;
+;; Type: DeployOk
+;; Header: 0xaff90f57
+;; TLB: deploy_ok#aff90f57 queryId:uint64 = DeployOk
+;;
+
+builder $DeployOk$_store(builder build_0, (int) v) inline {
+    var (v'queryId) = v;
+    build_0 = store_uint(build_0, 2952335191, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    return build_0;
+}
+
+cell $DeployOk$_store_cell((int) v) inline {
+    return $DeployOk$_store(begin_cell(), v).end_cell();
+}
+
+((int)) $DeployOk$_constructor_queryId(int queryId) inline {
+    return (queryId);
+}
+
+;;
+;; Type: CreateRetentionContract
+;; Header: 0x8b7b54c3
+;; TLB: create_retention_contract#8b7b54c3 contractId:uint32 secret:^string memo:^string expiration:uint64 = CreateRetentionContract
+;;
+
+(slice, ((int, slice, slice, int))) $CreateRetentionContract$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 2340115651);
+    var v'contractId = sc_0~load_uint(32);
+    var v'secret = sc_0~load_ref().begin_parse();
+    var v'memo = sc_0~load_ref().begin_parse();
+    var v'expiration = sc_0~load_uint(64);
+    return (sc_0, (v'contractId, v'secret, v'memo, v'expiration));
+}
+
+;;
+;; Type: RefundIfPossible
+;; Header: 0x7655ee71
+;; TLB: refund_if_possible#7655ee71 memo:^string secret:^string = RefundIfPossible
+;;
+
+(slice, ((slice, slice))) $RefundIfPossible$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 1985343089);
+    var v'memo = sc_0~load_ref().begin_parse();
+    var v'secret = sc_0~load_ref().begin_parse();
+    return (sc_0, (v'memo, v'secret));
+}
+
+;;
+;; Type: InternalAskForRefund
+;; Header: 0x5b9a7abc
+;; TLB: internal_ask_for_refund#5b9a7abc toAddress:address secret:uint256 memo:uint256 = InternalAskForRefund
+;;
+
+builder $InternalAskForRefund$_store(builder build_0, (slice, int, int) v) inline {
+    var (v'toAddress, v'secret, v'memo) = v;
+    build_0 = store_uint(build_0, 1536850620, 32);
+    build_0 = __tact_store_address(build_0, v'toAddress);
+    build_0 = build_0.store_uint(v'secret, 256);
+    build_0 = build_0.store_uint(v'memo, 256);
+    return build_0;
+}
+
+cell $InternalAskForRefund$_store_cell((slice, int, int) v) inline {
+    return $InternalAskForRefund$_store(begin_cell(), v).end_cell();
+}
+
+((slice, int, int)) $InternalAskForRefund$_constructor_toAddress_secret_memo(slice toAddress, int secret, int memo) inline {
+    return (toAddress, secret, memo);
+}
+
+;;
+;; Type: InternalCreateRefund
+;; Header: 0x69a3ac45
+;; TLB: internal_create_refund#69a3ac45 index:uint32 expiration:uint64 creator:address = InternalCreateRefund
+;;
+
+builder $InternalCreateRefund$_store(builder build_0, (int, int, slice) v) inline {
+    var (v'index, v'expiration, v'creator) = v;
+    build_0 = store_uint(build_0, 1772334149, 32);
+    build_0 = build_0.store_uint(v'index, 32);
+    build_0 = build_0.store_uint(v'expiration, 64);
+    build_0 = __tact_store_address(build_0, v'creator);
+    return build_0;
+}
+
+cell $InternalCreateRefund$_store_cell((int, int, slice) v) inline {
+    return $InternalCreateRefund$_store(begin_cell(), v).end_cell();
+}
+
+((int, int, slice)) $InternalCreateRefund$_constructor_index_expiration_creator(int index, int expiration, slice creator) inline {
+    return (index, expiration, creator);
+}
+
+;;
+;; Type: InternalReplyFromRetentionRefund
+;; Header: 0x48f00c55
+;; TLB: internal_reply_from_retention_refund#48f00c55 locked:uint64 index:int257 contractAddress:address creatorAddress:address = InternalReplyFromRetentionRefund
+;;
+
+(slice, ((int, int, slice, slice))) $InternalReplyFromRetentionRefund$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 1223691349);
+    var v'locked = sc_0~load_uint(64);
+    var v'index = sc_0~load_int(257);
+    var v'contractAddress = sc_0~__tact_load_address();
+    var v'creatorAddress = sc_0~__tact_load_address();
+    return (sc_0, (v'locked, v'index, v'contractAddress, v'creatorAddress));
+}
+
+;;
+;; Type: InternalAskForRefundCompleted
+;; Header: 0xd5f722fb
+;; TLB: internal_ask_for_refund_completed#d5f722fb amount:uint64 creator:address contractAddress:address index:uint32 = InternalAskForRefundCompleted
+;;
+
+(slice, ((int, slice, slice, int))) $InternalAskForRefundCompleted$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 3589743355);
+    var v'amount = sc_0~load_uint(64);
+    var v'creator = sc_0~__tact_load_address();
+    var v'contractAddress = sc_0~__tact_load_address();
+    var v'index = sc_0~load_uint(32);
+    return (sc_0, (v'amount, v'creator, v'contractAddress, v'index));
+}
+
+;;
+;; Type: InternalRefundContractCreated
+;; Header: 0x4ad1d84c
+;; TLB: internal_refund_contract_created#4ad1d84c contract:address amount:uint64 index:uint32 = InternalRefundContractCreated
+;;
+
+builder $InternalRefundContractCreated$_store(builder build_0, (slice, int, int) v) inline {
+    var (v'contract, v'amount, v'index) = v;
+    build_0 = store_uint(build_0, 1255266380, 32);
+    build_0 = __tact_store_address(build_0, v'contract);
+    build_0 = build_0.store_uint(v'amount, 64);
+    build_0 = build_0.store_uint(v'index, 32);
+    return build_0;
+}
+
+cell $InternalRefundContractCreated$_store_cell((slice, int, int) v) inline {
+    return $InternalRefundContractCreated$_store(begin_cell(), v).end_cell();
+}
+
+((slice, int, int)) $InternalRefundContractCreated$_constructor_contract_amount_index(slice contract, int amount, int index) inline {
+    return (contract, amount, index);
+}
+
+;;
+;; Type: InternalRefundContractClosed
+;; Header: 0xa947ee4f
+;; TLB: internal_refund_contract_closed#a947ee4f contract:address amount:uint64 index:uint32 = InternalRefundContractClosed
+;;
+
+builder $InternalRefundContractClosed$_store(builder build_0, (slice, int, int) v) inline {
+    var (v'contract, v'amount, v'index) = v;
+    build_0 = store_uint(build_0, 2840063567, 32);
+    build_0 = __tact_store_address(build_0, v'contract);
+    build_0 = build_0.store_uint(v'amount, 64);
+    build_0 = build_0.store_uint(v'index, 32);
+    return build_0;
+}
+
+cell $InternalRefundContractClosed$_store_cell((slice, int, int) v) inline {
+    return $InternalRefundContractClosed$_store(begin_cell(), v).end_cell();
+}
+
+((slice, int, int)) $InternalRefundContractClosed$_constructor_contract_amount_index(slice contract, int amount, int index) inline {
+    return (contract, amount, index);
+}
+
+;;
+;; Type: RetentionRefund
+;;
+
+builder $RetentionRefund$init$_store(builder build_0, (int, int, slice) v) inline {
+    var (v'hash, v'memo, v'parent) = v;
+    build_0 = build_0.store_int(v'hash, 257);
+    build_0 = build_0.store_int(v'memo, 257);
+    build_0 = __tact_store_address(build_0, v'parent);
+    return build_0;
+}
+
+(cell, cell) $RetentionRefund$_init_child(cell sys', int $hash, int $memo, slice $parent) inline_ref {
+    slice sc' = sys'.begin_parse();
+    cell source = sc'~load_dict();
+    cell contracts = new_dict();
+    
+    ;; Contract Code: RetentionRefund
+    cell mine = __tact_dict_get_code(source, 26773);
+    contracts = __tact_dict_set_code(contracts, 26773, mine);
+    
+    ;; Build cell
+    builder b = begin_cell();
+    b = b.store_ref(begin_cell().store_dict(contracts).end_cell());
+    b = b.store_int(false, 1);
+    b = $RetentionRefund$init$_store(b, ($hash, $memo, $parent));
+    return (mine, b.end_cell());
+}
+
+;;
+;; Type: RetentionUser
+;;
+
+builder $RetentionUser$init$_store(builder build_0, (slice, slice) v) inline {
+    var (v'parent, v'owner) = v;
+    build_0 = __tact_store_address(build_0, v'parent);
+    build_0 = __tact_store_address(build_0, v'owner);
+    return build_0;
+}
+
+(cell, cell) $RetentionUser$_init_child(cell sys', slice $parent, slice $owner) inline_ref {
+    slice sc' = sys'.begin_parse();
+    cell source = sc'~load_dict();
+    cell contracts = new_dict();
+    
+    ;; Contract Code: RetentionUser
+    cell mine = __tact_dict_get_code(source, 6903);
+    contracts = __tact_dict_set_code(contracts, 6903, mine);
+    
+    ;; Build cell
+    builder b = begin_cell();
+    b = b.store_ref(begin_cell().store_dict(contracts).end_cell());
+    b = b.store_int(false, 1);
+    b = $RetentionUser$init$_store(b, ($parent, $owner));
+    return (mine, b.end_cell());
+}
+
+;;
+;; Type: RetentionMain
+;;
+
+builder $RetentionMain$_store(builder build_0, (int, int, int, int, int, slice, int, int) v) inline {
+    var (v'commissionCost, v'current_locked, v'all_time_locked, v'all_time_refunded, v'next_index, v'owner, v'val, v'stopped) = v;
+    build_0 = build_0.store_uint(v'commissionCost, 32);
+    build_0 = build_0.store_uint(v'current_locked, 64);
+    build_0 = build_0.store_uint(v'all_time_locked, 64);
+    build_0 = build_0.store_uint(v'all_time_refunded, 64);
+    build_0 = build_0.store_uint(v'next_index, 64);
+    build_0 = __tact_store_address(build_0, v'owner);
+    build_0 = build_0.store_uint(v'val, 32);
+    build_0 = build_0.store_int(v'stopped, 1);
+    return build_0;
+}
+
+(slice, ((int, int, int, int, int, slice, int, int))) $RetentionMain$_load(slice sc_0) inline {
+    var v'commissionCost = sc_0~load_uint(32);
+    var v'current_locked = sc_0~load_uint(64);
+    var v'all_time_locked = sc_0~load_uint(64);
+    var v'all_time_refunded = sc_0~load_uint(64);
+    var v'next_index = sc_0~load_uint(64);
+    var v'owner = sc_0~__tact_load_address();
+    var v'val = sc_0~load_uint(32);
+    var v'stopped = sc_0~load_int(1);
+    return (sc_0, (v'commissionCost, v'current_locked, v'all_time_locked, v'all_time_refunded, v'next_index, v'owner, v'val, v'stopped));
+}
+
+(slice, ((int, slice))) $RetentionMain$init$_load(slice sc_0) inline {
+    var v'val = sc_0~load_int(257);
+    var v'owner = sc_0~__tact_load_address();
+    return (sc_0, (v'val, v'owner));
+}
+
+(int, int, int, int, int, slice, int, int) $RetentionMain$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    __tact_context_sys = $sc~load_ref();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$RetentionMain$_load();
+    } else {
+        ;; Allow only workchain deployments
+        throw_unless(137, my_address().preload_uint(11) == 1024);
+        (int val, slice owner) = $sc~$RetentionMain$init$_load();
+        $sc.end_parse();
+        return $RetentionMain$_contract_init(val, owner);
+    }
+}
+
+() $RetentionMain$_contract_store((int, int, int, int, int, slice, int, int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_ref(__tact_context_sys);
+    b = b.store_int(true, 1);
+    b = $RetentionMain$_store(b, v);
+    set_data(b.end_cell());
+}

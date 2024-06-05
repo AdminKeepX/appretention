@@ -1,0 +1,200 @@
+;;
+;; Type: StateInit
+;; TLB: _ code:^cell data:^cell = StateInit
+;;
+
+((cell, cell)) $StateInit$_not_null(tuple v) inline {
+    throw_if(128, null?(v));
+    var (cell vvv'code, cell vvv'data) = __tact_tuple_destroy_2(v);
+    return (vvv'code, vvv'data);
+}
+
+;;
+;; Type: SendParameters
+;; TLB: _ bounce:bool to:address value:int257 mode:int257 body:Maybe ^cell code:Maybe ^cell data:Maybe ^cell = SendParameters
+;;
+
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_bounce_to_value_mode_body_code_data(int bounce, slice to, int value, int mode, cell body, cell code, cell data) inline {
+    return (bounce, to, value, mode, body, code, data);
+}
+
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_value_bounce_mode_body(slice to, int value, int bounce, int mode, cell body) inline {
+    return (bounce, to, value, mode, body, null(), null());
+}
+
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_value_mode_body(slice to, int value, int mode, cell body) inline {
+    return (true, to, value, mode, body, null(), null());
+}
+
+((int, slice, int, int, cell, cell, cell)) $SendParameters$_constructor_to_bounce_value_mode_body(slice to, int bounce, int value, int mode, cell body) inline {
+    return (bounce, to, value, mode, body, null(), null());
+}
+
+;;
+;; Type: Deploy
+;; Header: 0x946a98b6
+;; TLB: deploy#946a98b6 queryId:uint64 = Deploy
+;;
+
+(slice, ((int))) $Deploy$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 2490013878);
+    var v'queryId = sc_0~load_uint(64);
+    return (sc_0, (v'queryId));
+}
+
+;;
+;; Type: DeployOk
+;; Header: 0xaff90f57
+;; TLB: deploy_ok#aff90f57 queryId:uint64 = DeployOk
+;;
+
+builder $DeployOk$_store(builder build_0, (int) v) inline {
+    var (v'queryId) = v;
+    build_0 = store_uint(build_0, 2952335191, 32);
+    build_0 = build_0.store_uint(v'queryId, 64);
+    return build_0;
+}
+
+cell $DeployOk$_store_cell((int) v) inline {
+    return $DeployOk$_store(begin_cell(), v).end_cell();
+}
+
+((int)) $DeployOk$_constructor_queryId(int queryId) inline {
+    return (queryId);
+}
+
+;;
+;; Type: InternalAskForRefund
+;; Header: 0x5b9a7abc
+;; TLB: internal_ask_for_refund#5b9a7abc toAddress:address secret:uint256 memo:uint256 = InternalAskForRefund
+;;
+
+(slice, ((slice, int, int))) $InternalAskForRefund$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 1536850620);
+    var v'toAddress = sc_0~__tact_load_address();
+    var v'secret = sc_0~load_uint(256);
+    var v'memo = sc_0~load_uint(256);
+    return (sc_0, (v'toAddress, v'secret, v'memo));
+}
+
+;;
+;; Type: InternalCreateRefund
+;; Header: 0x69a3ac45
+;; TLB: internal_create_refund#69a3ac45 index:uint32 expiration:uint64 creator:address = InternalCreateRefund
+;;
+
+(slice, ((int, int, slice))) $InternalCreateRefund$_load(slice sc_0) inline {
+    throw_unless(129, sc_0~load_uint(32) == 1772334149);
+    var v'index = sc_0~load_uint(32);
+    var v'expiration = sc_0~load_uint(64);
+    var v'creator = sc_0~__tact_load_address();
+    return (sc_0, (v'index, v'expiration, v'creator));
+}
+
+;;
+;; Type: InternalReplyFromRetentionRefund
+;; Header: 0x48f00c55
+;; TLB: internal_reply_from_retention_refund#48f00c55 locked:uint64 index:int257 contractAddress:address creatorAddress:address = InternalReplyFromRetentionRefund
+;;
+
+builder $InternalReplyFromRetentionRefund$_store(builder build_0, (int, int, slice, slice) v) inline {
+    var (v'locked, v'index, v'contractAddress, v'creatorAddress) = v;
+    build_0 = store_uint(build_0, 1223691349, 32);
+    build_0 = build_0.store_uint(v'locked, 64);
+    build_0 = build_0.store_int(v'index, 257);
+    build_0 = __tact_store_address(build_0, v'contractAddress);
+    build_0 = __tact_store_address(build_0, v'creatorAddress);
+    return build_0;
+}
+
+cell $InternalReplyFromRetentionRefund$_store_cell((int, int, slice, slice) v) inline {
+    return $InternalReplyFromRetentionRefund$_store(begin_cell(), v).end_cell();
+}
+
+((int, int, slice, slice)) $InternalReplyFromRetentionRefund$_constructor_locked_index_contractAddress_creatorAddress(int locked, int index, slice contractAddress, slice creatorAddress) inline {
+    return (locked, index, contractAddress, creatorAddress);
+}
+
+;;
+;; Type: InternalAskForRefundCompleted
+;; Header: 0xd5f722fb
+;; TLB: internal_ask_for_refund_completed#d5f722fb amount:uint64 creator:address contractAddress:address index:uint32 = InternalAskForRefundCompleted
+;;
+
+builder $InternalAskForRefundCompleted$_store(builder build_0, (int, slice, slice, int) v) inline {
+    var (v'amount, v'creator, v'contractAddress, v'index) = v;
+    build_0 = store_uint(build_0, 3589743355, 32);
+    build_0 = build_0.store_uint(v'amount, 64);
+    build_0 = __tact_store_address(build_0, v'creator);
+    build_0 = __tact_store_address(build_0, v'contractAddress);
+    build_0 = build_0.store_uint(v'index, 32);
+    return build_0;
+}
+
+cell $InternalAskForRefundCompleted$_store_cell((int, slice, slice, int) v) inline {
+    return $InternalAskForRefundCompleted$_store(begin_cell(), v).end_cell();
+}
+
+((int, slice, slice, int)) $InternalAskForRefundCompleted$_constructor_amount_creator_contractAddress_index(int amount, slice creator, slice contractAddress, int index) inline {
+    return (amount, creator, contractAddress, index);
+}
+
+;;
+;; Type: RetentionRefund
+;;
+
+builder $RetentionRefund$_store(builder build_0, (slice, slice, int, int, int, int, int) v) inline {
+    var (v'parent, v'creator, v'expiration, v'hash, v'memo, v'locked, v'index) = v;
+    build_0 = __tact_store_address(build_0, v'parent);
+    build_0 = __tact_store_address_opt(build_0, v'creator);
+    build_0 = build_0.store_uint(v'expiration, 64);
+    build_0 = build_0.store_uint(v'hash, 256);
+    var build_1 = begin_cell();
+    build_1 = build_1.store_uint(v'memo, 256);
+    build_1 = build_1.store_uint(v'locked, 64);
+    build_1 = build_1.store_uint(v'index, 32);
+    build_0 = store_ref(build_0, build_1.end_cell());
+    return build_0;
+}
+
+(slice, ((slice, slice, int, int, int, int, int))) $RetentionRefund$_load(slice sc_0) inline {
+    var v'parent = sc_0~__tact_load_address();
+    var v'creator = sc_0~__tact_load_address_opt();
+    var v'expiration = sc_0~load_uint(64);
+    var v'hash = sc_0~load_uint(256);
+    slice sc_1 = sc_0~load_ref().begin_parse();
+    var v'memo = sc_1~load_uint(256);
+    var v'locked = sc_1~load_uint(64);
+    var v'index = sc_1~load_uint(32);
+    return (sc_0, (v'parent, v'creator, v'expiration, v'hash, v'memo, v'locked, v'index));
+}
+
+(slice, ((int, int, slice))) $RetentionRefund$init$_load(slice sc_0) inline {
+    var v'hash = sc_0~load_int(257);
+    var v'memo = sc_0~load_int(257);
+    var v'parent = sc_0~__tact_load_address();
+    return (sc_0, (v'hash, v'memo, v'parent));
+}
+
+(slice, slice, int, int, int, int, int) $RetentionRefund$_contract_load() impure inline_ref {
+    slice $sc = get_data().begin_parse();
+    __tact_context_sys = $sc~load_ref();
+    int $loaded = $sc~load_int(1);
+    if ($loaded) {
+        return $sc~$RetentionRefund$_load();
+    } else {
+        ;; Allow only workchain deployments
+        throw_unless(137, my_address().preload_uint(11) == 1024);
+        (int hash, int memo, slice parent) = $sc~$RetentionRefund$init$_load();
+        $sc.end_parse();
+        return $RetentionRefund$_contract_init(hash, memo, parent);
+    }
+}
+
+() $RetentionRefund$_contract_store((slice, slice, int, int, int, int, int) v) impure inline {
+    builder b = begin_cell();
+    b = b.store_ref(__tact_context_sys);
+    b = b.store_int(true, 1);
+    b = $RetentionRefund$_store(b, v);
+    set_data(b.end_cell());
+}

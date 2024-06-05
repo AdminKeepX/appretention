@@ -1,0 +1,223 @@
+#pragma version =0.4.4;
+#pragma allow-post-modification;
+#pragma compute-asm-ltr;
+
+#include "tact_RetentionUser.headers.fc";
+#include "tact_RetentionUser.stdlib.fc";
+#include "tact_RetentionUser.constants.fc";
+#include "tact_RetentionUser.storage.fc";
+
+;;
+;; Contract RetentionUser functions
+;;
+
+(slice, slice, cell, int, int) $RetentionUser$_contract_init(slice $parent, slice $owner) impure inline_ref {
+    var (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked)) = (null(), null(), null(), 0, 0);
+    $self'contractsMap = null();
+    $self'parent = $parent;
+    $self'owner = $owner;
+    return ($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked);
+}
+
+((slice, slice, cell, int, int), int) $RetentionUser$_fun_currentLocked((slice, slice, cell, int, int) $self) impure inline_ref {
+    var (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked)) = $self;
+    return (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked), ($self'all_time_locked - $self'refunded));
+}
+
+((slice, slice, cell, int, int), int) $RetentionUser$_fun_allTimeLocked((slice, slice, cell, int, int) $self) impure inline_ref {
+    var (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked)) = $self;
+    return (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked), $self'all_time_locked);
+}
+
+((slice, slice, cell, int, int), int) $RetentionUser$_fun_allTimeRefunded((slice, slice, cell, int, int) $self) impure inline_ref {
+    var (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked)) = $self;
+    return (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked), $self'refunded);
+}
+
+((slice, slice, cell, int, int), slice) $RetentionUser$_fun_addressForKey((slice, slice, cell, int, int) $self, int $key) impure inline_ref {
+    var (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked)) = $self;
+    return (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked), __tact_dict_get_int_slice($self'contractsMap, 257, $key));
+}
+
+((slice, slice, cell, int, int), slice) $RetentionUser$_fun_allKeys((slice, slice, cell, int, int) $self) impure inline_ref {
+    var (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked)) = $self;
+    tuple $keys = __tact_string_builder_start_string();
+    int $count = 0;
+    cell $mmm = $self'contractsMap;
+    var ($key, $value, $fresh$flag_1) = __tact_dict_min_int_slice($mmm, 257);
+    while ($fresh$flag_1) {
+        if (($count > 0)) {
+            $keys~__tact_string_builder_append(__gen_slice_string_4ee8888d01627a5b474e9faffd54b20b84dcc566933880a09b1be21640019c02());
+        }
+        $keys~__tact_string_builder_append(__tact_int_to_string($key));
+        $count = ($count + 1);
+        ($key, $value, $fresh$flag_1) = __tact_dict_next_int_slice($mmm, 257, $key);
+    }
+    return (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked), __tact_string_builder_end_slice($keys));
+}
+
+((slice, slice, cell, int, int), cell) $RetentionUser$_fun_allItems((slice, slice, cell, int, int) $self) impure inline_ref {
+    var (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked)) = $self;
+    return (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked), $self'contractsMap);
+}
+
+((slice, slice, cell, int, int), slice) $RetentionUser$_fun_owner((slice, slice, cell, int, int) $self) impure inline_ref {
+    var (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked)) = $self;
+    return (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked), $self'owner);
+}
+
+;;
+;; Receivers of a Contract RetentionUser
+;;
+
+(((slice, slice, cell, int, int)), ()) $RetentionUser$_internal_binary_InternalRefundContractCreated((slice, slice, cell, int, int) $self, (slice, int, int) $msg) impure inline {
+    var ($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked) = $self;
+    var ($msg'contract, $msg'amount, $msg'index) = $msg;
+    $self'all_time_locked = ($self'all_time_locked + $msg'amount);
+    $self'contractsMap~__tact_dict_set_int_slice(257, $msg'index, $msg'contract);
+    return (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked), ());
+}
+
+(((slice, slice, cell, int, int)), ()) $RetentionUser$_internal_binary_InternalRefundContractClosed((slice, slice, cell, int, int) $self, (slice, int, int) $msg) impure inline {
+    var ($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked) = $self;
+    var ($msg'contract, $msg'amount, $msg'index) = $msg;
+    $self'refunded = ($self'refunded + $msg'amount);
+    $self'contractsMap~__tact_dict_set_int_slice(257, $msg'index, null());
+    return (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked), ());
+}
+
+(((slice, slice, cell, int, int)), ()) $RetentionUser$_internal_binary_Deploy((slice, slice, cell, int, int) $self, (int) $deploy) impure inline {
+    var ($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked) = $self;
+    var ($deploy'queryId) = $deploy;
+    ($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked)~$RetentionUser$_fun_notify($DeployOk$_store_cell($DeployOk$_constructor_queryId($deploy'queryId)));
+    return (($self'parent, $self'owner, $self'contractsMap, $self'refunded, $self'all_time_locked), ());
+}
+
+;;
+;; Get methods of a Contract RetentionUser
+;;
+
+_ %currentLocked() method_id(105854) {
+    var self = $RetentionUser$_contract_load();
+    var res = self~$RetentionUser$_fun_currentLocked();
+    return res;
+}
+
+_ %allTimeLocked() method_id(100031) {
+    var self = $RetentionUser$_contract_load();
+    var res = self~$RetentionUser$_fun_allTimeLocked();
+    return res;
+}
+
+_ %allTimeRefunded() method_id(129520) {
+    var self = $RetentionUser$_contract_load();
+    var res = self~$RetentionUser$_fun_allTimeRefunded();
+    return res;
+}
+
+_ %addressForKey(int $$key) method_id(88971) {
+    int $key = $$key;
+    var self = $RetentionUser$_contract_load();
+    var res = self~$RetentionUser$_fun_addressForKey($key);
+    return res;
+}
+
+_ %allKeys() method_id(78170) {
+    var self = $RetentionUser$_contract_load();
+    var res = self~$RetentionUser$_fun_allKeys();
+    return res;
+}
+
+_ %allItems() method_id(68968) {
+    var self = $RetentionUser$_contract_load();
+    var res = self~$RetentionUser$_fun_allItems();
+    return res;
+}
+
+_ %owner() method_id(83229) {
+    var self = $RetentionUser$_contract_load();
+    var res = self~$RetentionUser$_fun_owner();
+    return res;
+}
+
+_ supported_interfaces() method_id {
+    return (
+        "org.ton.introspection.v0"H >> 128,
+        "org.ton.abi.ipfs.v0"H >> 128,
+        "org.ton.deploy.lazy.v0"H >> 128,
+        "org.ton.chain.workchain.v0"H >> 128,
+        "org.ton.ownable"H >> 128
+    );
+}
+
+_ get_abi_ipfs() method_id {
+    return "ipfs://Qme1v4nYVPo7UHqDNZp56mPCXBVH1B1mu5VCnB6fct1oz1";
+}
+
+_ lazy_deployment_completed() method_id {
+    return get_data().begin_parse().load_int(1);
+}
+
+;;
+;; Routing of a Contract RetentionUser
+;;
+
+((slice, slice, cell, int, int), int) $RetentionUser$_contract_router_internal((slice, slice, cell, int, int) self, int msg_bounced, slice in_msg) impure inline_ref {
+    ;; Handle bounced messages
+    if (msg_bounced) {
+        return (self, true);
+    }
+    
+    ;; Parse incoming message
+    int op = 0;
+    if (slice_bits(in_msg) >= 32) {
+        op = in_msg.preload_uint(32);
+    }
+    
+    
+    ;; Receive InternalRefundContractCreated message
+    if (op == 1255266380) {
+        var msg = in_msg~$InternalRefundContractCreated$_load();
+        self~$RetentionUser$_internal_binary_InternalRefundContractCreated(msg);
+        return (self, true);
+    }
+    
+    ;; Receive InternalRefundContractClosed message
+    if (op == 2840063567) {
+        var msg = in_msg~$InternalRefundContractClosed$_load();
+        self~$RetentionUser$_internal_binary_InternalRefundContractClosed(msg);
+        return (self, true);
+    }
+    
+    ;; Receive Deploy message
+    if (op == 2490013878) {
+        var msg = in_msg~$Deploy$_load();
+        self~$RetentionUser$_internal_binary_Deploy(msg);
+        return (self, true);
+    }
+    
+    return (self, false);
+}
+
+() recv_internal(int msg_value, cell in_msg_cell, slice in_msg) impure {
+    
+    ;; Context
+    var cs = in_msg_cell.begin_parse();
+    var msg_flags = cs~load_uint(4);
+    var msg_bounced = -(msg_flags & 1);
+    slice msg_sender_addr = __tact_verify_address(cs~load_msg_addr());
+    __tact_context = (msg_bounced, msg_sender_addr, msg_value, cs);
+    __tact_context_sender = msg_sender_addr;
+    
+    ;; Load contract data
+    var self = $RetentionUser$_contract_load();
+    
+    ;; Handle operation
+    int handled = self~$RetentionUser$_contract_router_internal(msg_bounced, in_msg);
+    
+    ;; Throw if not handled
+    throw_unless(130, handled);
+    
+    ;; Persist state
+    $RetentionUser$_contract_store(self);
+}
