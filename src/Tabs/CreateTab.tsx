@@ -77,7 +77,7 @@ const CreateTab: React.FC = () => {
 
     const handleSecretChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        const regex = /^[a-zA-Z0-9!@#$%^&*()_+[\]{};':"\\|,.<>/?-]*$/;
+        const regex = /^[a-zA-Z0-9!@#$%^&*() _+[\]{};':"\\|,.<>/?-]*$/;
         if (regex.test(value)) {
           setSecret(value);
         }
@@ -117,8 +117,8 @@ const CreateTab: React.FC = () => {
                     value={secret}
                     onChange = { handleSecretChange }
                     inputProps={{ minLength: 16 }}
-                    helperText={secret.length < 16 ? "Minimum length is 16 characters" : "A-z, 0-9 and symbols" }
-                    error={secret.length < 16}
+                    helperText={"Min 16 chars (A-z, 0-9 and symbols)" }
+                    // error={secret.length < 16}
                 />
                 <MemoField
                     label="Memo"
