@@ -1,10 +1,10 @@
 import { useState } from "react";
 // import RetentionMain from "../../wrappers/RetentionMain";
-import { RetentionMain } from "../../wrappers/RetentionMain";
+import { RetentionMain } from "../wrappers/RetentionMain";
 import { useTonClient } from "./useTonClient";
 import { useAsyncInitialize } from "./useAsyncInitialize";
 import { useTonConnect } from "./useTonConnect";
-import { Address, OpenedContract, toNano } from "ton-core";
+import { Address, OpenedContract, toNano } from "@ton/core";
 import { useQuery } from "@tanstack/react-query";
 import { CHAIN } from "@tonconnect/protocol";
 
@@ -20,7 +20,7 @@ export function useRefundContract() {
 
   return {
     requestRefund: () => {
-        mainContract.send(
+        mainContract!!.send(
             sender, 
             {
                 value: toNano("0.5")

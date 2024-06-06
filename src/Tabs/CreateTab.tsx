@@ -108,7 +108,6 @@ const CreateTab: React.FC = () => {
                     label="Select Date and Time"
                     value={dateTime}
                     onChange={handleDateTimeChange}
-                    renderInput={(params) => <TextField {...params} fullWidth margin="normal" />}
                 />
             </LocalizationProvider>            
             <FormRow>

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 // import RetentionMain from "../../wrappers/RetentionMain";
-import { RetentionMain } from "../../wrappers/RetentionMain";
+import { RetentionMain } from "../wrappers/RetentionMain";
 import { useTonClient } from "./useTonClient";
 import { useAsyncInitialize } from "./useAsyncInitialize";
 import { useTonConnect } from "./useTonConnect";
-import { Address, OpenedContract, toNano } from "ton-core";
+import { Address, OpenedContract, toNano } from "@ton/core";
 import { useQuery } from "@tanstack/react-query";
 import { CHAIN } from "@tonconnect/protocol";
 
@@ -20,7 +20,7 @@ export function useMainContract() {
 
   return {
     createRefund: () => {
-        mainContract.send(
+        mainContract!!.send(
             sender, 
             {
                 value: toNano("2.1")
@@ -120,58 +120,7 @@ export function useMainContractAmount() {
         execute();
     }, [mainContract]);
     
-    // const { addressData, isFetchingAddress } = useQuery(
-    //     ["0"],
-    //     async () => {
-    //       if (!mainContract) return null;
-    
-    //       return mainContract.address.toString()
-    //     },
-    //     { refetchInterval: 3000 }
-    // );
-
-    // const { currentLockedData, isFetchingCurrentLocked } = useQuery(
-    //     ["0"],
-    //     async () => {
-    //       if (!mainContract) return null;
-    
-    //       return (await mainContract.getCurrentLocked().toString())
-    //     },
-    //     { refetchInterval: 3000 }
-    // );
-
-    // const { allTimeLockedData, isFetchingAllTimeLocked } = useQuery(
-    //     ["0"],
-    //     async () => {
-    //       if (!mainContract) return null;
-    
-    //       return (await mainContract.getAllTimeLocked().toString())
-    //     },
-    //     { refetchInterval: 3000 }
-    // );
-
-    // const { allTimeRefundedData, isFetchingAllTimeRefunded } = useQuery(
-    //     ["0"],
-    //     async () => {
-    //       if (!mainContract) return null;
-    
-    //       return (await mainContract.getAllTimeRefunded().toString())
-    //     },
-    //     { refetchInterval: 3000 }
-    // );
-
-    // const { commissionData, isFetchingtCommission } = useQuery(
-    //     ["0"],
-    //     async () => {
-    //       if (!mainContract) return null;
-    
-    //       return (await mainContract.getCommission().toString())
-    //     },
-    //     { refetchInterval: 3000 }
-    // );
-    
       return {
-        
         address: address,
         countIndex: countIndex,
         currentLocked: currentLocked,
