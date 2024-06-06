@@ -3,10 +3,35 @@ import { Box, Typography, Divider, Button, Table, TableBody, TableCell, TableCon
 import EmptyScreen from '../components/EmptyScreen';
 import ContentContainer from '../components/ContentContainer';
 import { useMainContractAmount } from '../hooks/useMainContract';
+import { styled } from '@mui/system';
 
 interface HomeTabProps {
   switchToCreateTab: () => void;
 }
+
+const ImageContainer = styled(Box)`
+  background-color: #f0f0f0; /* Серый фон */
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+const InfoContainer = styled(Box)`
+  background-color: #ffffff; /* Серый фон */
+  padding-left: 0px;
+  border-radius: 0px;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 0px;
+`;
+
+const CenteredTypography = styled(Typography)`
+  padding-top: 20px;
+  text-align: center;
+  width: 100%;
+`;
 
 const HomeTab: React.FC<HomeTabProps> = ({ switchToCreateTab }) => {
   const [count, setCount] = useState(1);
@@ -28,35 +53,40 @@ const HomeTab: React.FC<HomeTabProps> = ({ switchToCreateTab }) => {
         <EmptyScreen onCreateContract={switchToCreateTab} />
       ) : (
         <Box>
-          <Typography variant="h4" gutterBottom>
-            Contract Info:
-          </Typography>
-          <Typography variant="h6" gutterBottom>
+          <ImageContainer>
+            <img src="../../logo_clear_128.png" alt="Your Image" style={{ maxWidth: '100%', height: 'auto' }} />
+          </ImageContainer>
+          <InfoContainer>
+          <CenteredTypography variant="h5" gutterBottom>
+            Overview
+          </CenteredTypography>
+          <Typography variant="body1" gutterBottom>
             Address: {address}
           </Typography>
 
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="body1" gutterBottom>
             Amount of contracts: {countIndex}
           </Typography>
 
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="body1" gutterBottom>
             Current Locked: {currentLocked}
           </Typography>
-           <Typography variant="h6" gutterBottom>
+           <Typography variant="body1" gutterBottom>
             All time Locked: {allTimeLocked}
           </Typography>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="body1" gutterBottom>
             All Time Refunded: {allTimeRefunded}
           </Typography>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="body1" gutterBottom>
             Commission: {commission}
           </Typography>
+          </InfoContainer>
           <Divider />
           
 
-          <Typography variant="h4" gutterBottom>
+          <CenteredTypography variant="h5" gutterBottom>
             My Contracts
-          </Typography>
+          </CenteredTypography>
           <Divider />
           <Typography variant="body1" gutterBottom>
             Here you can find all your active contracts.
