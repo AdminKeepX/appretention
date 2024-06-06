@@ -54,7 +54,7 @@ const HomeTab: React.FC<HomeTabProps> = ({ switchToCreateTab }) => {
       ) : (
         <Box>
           <ImageContainer>
-            <img src="../../logo_clear_128.png" alt="Your Image" style={{ maxWidth: '100%', height: 'auto' }} />
+            <img src="https://imagedelivery.net/jXa8AdnaglgswFluUtTihA/5724030a-2864-4781-5c5b-de3f7e4a5b00/128" alt="Your Image" style={{ maxWidth: '100%', height: 'auto' }} />
           </ImageContainer>
           <InfoContainer>
           <CenteredTypography variant="h5" gutterBottom>

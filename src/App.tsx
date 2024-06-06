@@ -21,9 +21,9 @@ import AboutTab from "./Tabs/AboutTab";
 
 const MainContainer = styled(Container)`
   background-color: white; /* Устанавливаем белый фон */
-  margin-top: 20px; /* Высота AppBar */
+  margin-top: 0px; /* Высота AppBar */
   padding: 0; /* Убираем отступы */
-  height: calc(100vh - 20px); /* Полная высота минус высота AppBar */
+  height: calc(100vh + 200px); /* Полная высота минус высота AppBar */
   overflow-y: auto;
 `;
 
