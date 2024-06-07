@@ -29,16 +29,16 @@ const MainContainer = styled(Container)`
 
 function App() {
   const { network } = useTonConnect();
-  const [value, setValue] = useState(0);
+  const [currentTab, setCurrentTab] = useState(0);
 
-  const switchToCreateTab = () => {
-    setValue(1); // Assuming the index of CreateTab is 1
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setCurrentTab(newValue);
   };
 
   let content;
-  switch (value) {
+  switch (currentTab) {
     case 0:
-      content = <HomeTab switchToCreateTab={switchToCreateTab} />;
+      content = <HomeTab onTabChange={setCurrentTab} />;
       break;
     case 1:
       content = <CreateTab />;
@@ -50,35 +50,30 @@ function App() {
       content = <AboutTab />;
       break;
     default:
-      content = <HomeTab switchToCreateTab={switchToCreateTab} />;
+      content = <HomeTab onTabChange={setCurrentTab} />;
   }
 
   return (
     <>
-    <MainContainer maxWidth="lg">
-      <AppAppBar/>
-    
-      <Box sx={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', mt: 8 }}>
-      
-        <Container sx={{ flexGrow: 1, padding: 0 }}> {/* Убираем отступы */}
-          {content}
-        </Container>
-        
-        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-          <BottomNavigation
-            showLabels
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-            }}
-          >
-            <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-            <BottomNavigationAction label="Create" icon={<AddCircleIcon />} />
-            <BottomNavigationAction label="Request" icon={<RequestQuoteIcon />} />
-            <BottomNavigationAction label="About" icon={<InfoIcon />} />
-          </BottomNavigation>
-        </Paper>
-      </Box>
+      <MainContainer maxWidth="lg">
+        <AppAppBar />
+        <Box sx={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', mt: 8 }}>
+          <Container sx={{ flexGrow: 1, padding: 0 }}> {/* Убираем отступы */}
+            {content}
+          </Container>
+          <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+            <BottomNavigation
+              showLabels
+              value={currentTab}
+              onChange={handleChange}
+            >
+              <BottomNavigationAction label="Home" icon={<HomeIcon />} />
+              <BottomNavigationAction label="Create" icon={<AddCircleIcon />} />
+              <BottomNavigationAction label="Request" icon={<RequestQuoteIcon />} />
+              <BottomNavigationAction label="About" icon={<InfoIcon />} />
+            </BottomNavigation>
+          </Paper>
+        </Box>
       </MainContainer>
     </>
   );
