@@ -13,11 +13,12 @@ import Paper from '@mui/material/Paper';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { Container, styled } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HomeTab from "./Tabs/HomeTab";
 import CreateTab from "./Tabs/CreateTab";
 import Request from "./Tabs/Request";
 import AboutTab from "./Tabs/AboutTab";
+import { useViewport } from "@tma.js/sdk-react";
 
 const MainContainer = styled(Container)`
   background-color: white; /* Устанавливаем белый фон */
@@ -30,10 +31,18 @@ const MainContainer = styled(Container)`
 function App() {
   const { network } = useTonConnect();
   const [currentTab, setCurrentTab] = useState(0);
+  const viewport = useViewport();
+
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue);
   };
+
+  useEffect(() => {
+    if(viewport) {
+      viewport.expand();
+    }
+  }, [viewport])
 
   let content;
   switch (currentTab) {

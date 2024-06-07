@@ -5,7 +5,7 @@ import { TonConnectButton } from '@tonconnect/ui-react';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 const GradientAppBar = styled(AppBar)`
-  background: linear-gradient(to right,#0276FF, #00E0FF);
+  background: linear-gradient(to right, #0276FF, #00E0FF);
   height: 64px;
 `;
 
