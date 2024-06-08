@@ -1246,12 +1246,14 @@ Values:
   padding-bottom: 0px;
   display: flex;
   width: 100%;
+  overflow: hidden;
 `,ImageContainer=styled$3(Box$1)`
   padding-top: 10px;
   padding-bottom: 10px;
   display: flex;
   justify-content: center;
   width: 100%;
+  overflow: hidden;
 `,InfoContainer=styled$3(Box$1)`
   background-color: #ffffff; /* Белый фон */
   padding-left: 16px;
@@ -1260,21 +1262,21 @@ Values:
   width: 100%;
   max-width: 100%;
   margin-bottom: 0px;
+  overflow: hidden;
 `,CenteredTypography=styled$3(Typography$1)`
   padding-top: 20px;
   text-align: center;
   width: 100%;
 `,CenteredSmallTypography=styled$3(Typography$1)`
   padding-top: 0px;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding-left: 40px;
+  padding-right: 40px;
   text-align: center;
 `,ButtonContainer=styled$3(Box$1)`
   padding-top: 20px;
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: 500px;
   padding-bottom: 40px;
   height: 44px;
 `,BlueButton=styled$3(Button$1)`
