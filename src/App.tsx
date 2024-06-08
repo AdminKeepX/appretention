@@ -18,7 +18,14 @@ import HomeTab from "./Tabs/HomeTab";
 import CreateTab from "./Tabs/CreateTab";
 import Request from "./Tabs/Request";
 import AboutTab from "./Tabs/AboutTab";
-import { useViewport } from "@tma.js/sdk-react";
+
+import WebApp from '@twa-dev/sdk'
+
+// import { initViewport } from '@tma.js/sdk';
+// import {requestViewport} from '@tma.js/sdk';
+
+
+
 
 const MainContainer = styled(Container)`
   background-color: white; /* Устанавливаем белый фон */
@@ -31,7 +38,7 @@ const MainContainer = styled(Container)`
 function App() {
   const { network } = useTonConnect();
   const [currentTab, setCurrentTab] = useState(0);
-  const viewport = useViewport();
+
 
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -39,10 +46,8 @@ function App() {
   };
 
   useEffect(() => {
-    if(viewport) {
-      viewport.expand();
-    }
-  }, [viewport])
+    WebApp.expand()
+  }, [])
 
   let content;
   switch (currentTab) {
