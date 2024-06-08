@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      .scrollable-element {
+        overflow-y: scroll;
+        height: 32rem;
+        font-size: 6.25rem;
+        border: 1px solid;
+      }
+    </style>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover" />
@@ -8,7 +16,29 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx">
+      function ensureDocumentIsScrollable() {
+        const isScrollable =
+          document.documentElement.scrollHeight > window.innerHeight;
+        if (!isScrollable) {
+          document.documentElement.style.setProperty(
+            "height",
+            "calc(100vh + 1px)",
+            "important"
+          );
+        }
+      }
+      function preventCollapse() {
+        if (window.scrollY === 0) {
+          window.scrollTo(0, 1);
+        }
+      }
+
+      const scrollableElement = document.querySelector(".scrollable-element");
+      scrollableElement.addEventListener("touchstart", preventCollapse);
+
+      window.addEventListener("load", ensureDocumentIsScrollable);
+    </script>
   </body>
 </html>
 
