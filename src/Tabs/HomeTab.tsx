@@ -16,6 +16,7 @@ const TopContainer = styled(Box)`
   padding-bottom: 0px;
   display: flex;
   width: 100%;
+  overflow: hidden;
 `;
 
 const ImageContainer = styled(Box)`
@@ -24,6 +25,7 @@ const ImageContainer = styled(Box)`
   display: flex;
   justify-content: center;
   width: 100%;
+  overflow: hidden;
 `;
 
 const InfoContainer = styled(Box)`
@@ -34,6 +36,7 @@ const InfoContainer = styled(Box)`
   width: 100%;
   max-width: 100%;
   margin-bottom: 0px;
+  overflow: hidden;
 `;
 
 const CenteredTypography = styled(Typography)`
@@ -44,8 +47,8 @@ const CenteredTypography = styled(Typography)`
 
 const CenteredSmallTypography = styled(Typography)`
   padding-top: 0px;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding-left: 40px;
+  padding-right: 40px;
   text-align: center;
 `;
 
@@ -54,7 +57,6 @@ const ButtonContainer = styled(Box)`
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: 500px;
   padding-bottom: 40px;
   height: 44px;
 `;
