@@ -11,7 +11,7 @@ interface HomeTabProps {
 }
 
 const TopContainer = styled(Box)`
-  background-color: #FAFBFC; /* Серый фон */
+  background-color: #FF0000; /* Серый фон */
   padding-top: 0px;
   padding-bottom: 0px;
   display: flex;
@@ -104,87 +104,80 @@ const HomeTab: React.FC<HomeTabProps> = ({ onTabChange }) => {
   };
 
   return (
-    <ContentContainer>
-      {count === 0 ? (
-        <EmptyScreen onCreateContract={handleCreateContract} />
-      ) : (
-        <Box>
-          <TopContainer>
-            <Stack spacing={1}>
-              <ImageContainer>
-                <img src="https://imagedelivery.net/jXa8AdnaglgswFluUtTihA/5724030a-2864-4781-5c5b-de3f7e4a5b00/128" alt="Your Image" style={{ maxWidth: '100%', height: 'auto' }} />
-              </ImageContainer>
-              <CenteredSmallTypography variant="h6" gutterBottom>
-                Create payout contracts or request funds from accounts
-              </CenteredSmallTypography>
-              <CenteredSmallTypography variant="body1" gutterBottom>
-                Plan for long-term storage, create inheritance transfers, protect your capital from impulsive actions!
-              </CenteredSmallTypography>
-              <ButtonContainer>
-                <BlueButton onClick={handleCreateContract} variant="contained" style={{ flex: 1, marginRight: 8, marginLeft: 60 }}>
-                  Create
-                </BlueButton>
-                <GreyButton onClick={handleRequestPayout} variant="contained" style={{ flex: 1, marginLeft: 8, marginRight: 60 }}>
-                  Payout
-                </GreyButton>
-              </ButtonContainer>
-            </Stack>
-          </TopContainer>
-          <InfoContainer>
-            <Typography variant="body1" gutterBottom>
-              Address: {address}
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              Amount of contracts: {countIndex}
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              Current Locked: {currentLocked}
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              All time Locked: {allTimeLocked}
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              All Time Refunded: {allTimeRefunded}
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              Commission: {commission}
-            </Typography>
-          </InfoContainer>
-          <Divider />
-          <CenteredTypography variant="h5" gutterBottom>
-            My Contracts
-          </CenteredTypography>
-          <Divider />
-          <Typography variant="body1" gutterBottom>
-            Here you can find all your active contracts.
-          </Typography>
-          <Typography variant="h6" gutterBottom>
-            Total Amount: {getTotal()}
-          </Typography>
-          <Divider />
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Contract Name</TableCell>
-                  <TableCell>Amount</TableCell>
-                  <TableCell>Date</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {contracts.map((contract) => (
-                  <TableRow key={contract.id}>
-                    <TableCell>{contract.name}</TableCell>
-                    <TableCell>{contract.amount}</TableCell>
-                    <TableCell>{contract.date}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Box>
-      )}
-    </ContentContainer>
+    <div>
+      <TopContainer>
+        <Stack spacing={1}>
+          <ImageContainer>
+            <img src="https://imagedelivery.net/jXa8AdnaglgswFluUtTihA/5724030a-2864-4781-5c5b-de3f7e4a5b00/128" alt="Your Image" style={{ maxWidth: '100%', height: 'auto' }} />
+          </ImageContainer>
+          <CenteredSmallTypography variant="h6" gutterBottom>
+            Create payout contracts or request funds from accounts
+          </CenteredSmallTypography>
+          <CenteredSmallTypography variant="body1" gutterBottom>
+            Plan for long-term storage, create inheritance transfers, protect your capital from impulsive actions!
+          </CenteredSmallTypography>
+          <ButtonContainer>
+            <BlueButton onClick={handleCreateContract} variant="contained" style={{ flex: 1, marginRight: 8, marginLeft: 60 }}>
+              Create
+            </BlueButton>
+            <GreyButton onClick={handleRequestPayout} variant="contained" style={{ flex: 1, marginLeft: 8, marginRight: 60 }}>
+              Payout
+            </GreyButton>
+          </ButtonContainer>
+        </Stack>
+      </TopContainer>
+      {/* <InfoContainer>
+        <Typography variant="body1" gutterBottom>
+          Address: {address}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          Amount of contracts: {countIndex}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          Current Locked: {currentLocked}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          All time Locked: {allTimeLocked}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          All Time Refunded: {allTimeRefunded}
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          Commission: {commission}
+        </Typography>
+      </InfoContainer> */}
+      {/* <CenteredTypography variant="h5" gutterBottom>
+        My Contracts
+      </CenteredTypography>
+      <Divider />
+      <Typography variant="body1" gutterBottom>
+        Here you can find all your active contracts.
+      </Typography>
+      <Typography variant="h6" gutterBottom>
+        Total Amount: {getTotal()}
+      </Typography>
+      <Divider />
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Contract Name</TableCell>
+              <TableCell>Amount</TableCell>
+              <TableCell>Date</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {contracts.map((contract) => (
+              <TableRow key={contract.id}>
+                <TableCell>{contract.name}</TableCell>
+                <TableCell>{contract.amount}</TableCell>
+                <TableCell>{contract.date}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer> */}
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@ import { TonConnectButton } from "@tonconnect/ui-react";
 import { useTonConnect } from "./hooks/useTonConnect";
 import { CHAIN } from "@tonconnect/protocol";
 import "@twa-dev/sdk";
-import AppAppBar from "./components/MainAppBar";
+import MainAppBar from "./components/MainAppBar";
 import HomeIcon from '@mui/icons-material/Home';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
@@ -21,33 +21,40 @@ import AboutTab from "./Tabs/AboutTab";
 
 import WebApp from '@twa-dev/sdk'
 
-// import { initViewport } from '@tma.js/sdk';
-// import {requestViewport} from '@tma.js/sdk';
-
-
-
-
 const MainContainer = styled(Container)`
-  background-color: white; /* Устанавливаем белый фон */
-  margin-top: 0px; /* Высота AppBar */
+  background-color: green; /* Устанавливаем белый фон */
+  margin-top: 20px; /* Высота AppBar */
   padding: 0; /* Убираем отступы */
-  height: calc(100vh + 200px); /* Полная высота минус высота AppBar */
   overflow-y: auto;
+  padding-bottom: 20px; /* Отступ для BottomNavigation */
 `;
+
+const FloatingBottomNavigation = styled(Paper)`
+  position: fixed;
+  bottom: 16px; /* Отступ от нижнего края экрана */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%; /* Ширина навигации */
+  max-width: 600px; /* Максимальная ширина */
+  border-radius: 16px; /* Радиус скругления */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5); /* Тень */
+  overflow: hidden;
+  z-index: 1000;
+`;
+
+
 
 function App() {
   const { network } = useTonConnect();
   const [currentTab, setCurrentTab] = useState(0);
-
-
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue);
   };
 
   useEffect(() => {
-    WebApp.expand()
-  }, [])
+    WebApp.expand();
+  }, []);
 
   let content;
   switch (currentTab) {
@@ -69,26 +76,22 @@ function App() {
 
   return (
     <>
-      <MainContainer maxWidth="lg">
-        <AppAppBar />
-        <Box sx={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', mt: 8 }}>
-          <Container sx={{ flexGrow: 1, padding: 0 }}> {/* Убираем отступы */}
-            {content}
-          </Container>
-          <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-            <BottomNavigation
-              showLabels
-              value={currentTab}
-              onChange={handleChange}
-            >
-              <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-              <BottomNavigationAction label="Create" icon={<AddCircleIcon />} />
-              <BottomNavigationAction label="Request" icon={<RequestQuoteIcon />} />
-              <BottomNavigationAction label="About" icon={<InfoIcon />} />
-            </BottomNavigation>
-          </Paper>
-        </Box>
+      <MainAppBar />
+      <MainContainer>
+        {content}
       </MainContainer>
+      <FloatingBottomNavigation>
+        <BottomNavigation
+          showLabels
+          value={currentTab}
+          onChange={handleChange}
+        >
+          <BottomNavigationAction label="Home" icon={<HomeIcon />} />
+          <BottomNavigationAction label="Create" icon={<AddCircleIcon />} />
+          <BottomNavigationAction label="Request" icon={<RequestQuoteIcon />} />
+          <BottomNavigationAction label="About" icon={<InfoIcon />} />
+        </BottomNavigation>
+      </FloatingBottomNavigation>
     </>
   );
 }
