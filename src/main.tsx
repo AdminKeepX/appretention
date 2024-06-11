@@ -3,6 +3,7 @@ import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
+import appTheme from "./components/appTheme";
 
 
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
@@ -14,30 +15,12 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 
-const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-    primary: {
-      main: '#0000ff',
-    },
-    secondary: {
-      // main: '#dc004e',
-      main: '#FF0000',
-    },
-    background: {
-      default: '#f0FF0f',
-    },
-  },
-  typography: {
-    fontFamily: 'Arial, sans-serif',
-  },
-  // Добавьте другие настройки темы по необходимости
-});
+
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <TonConnectUIProvider manifestUrl={manifestUrl}>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={lightTheme}>
+      <ThemeProvider theme={appTheme}>
       <CssBaseline />
         <App />
       </ThemeProvider>

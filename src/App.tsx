@@ -44,6 +44,13 @@ const FloatingBottomNavigation = styled(Paper)`
 `;
 
 
+const StyledBottomNavigationAction = styled(BottomNavigationAction)(({ theme }) => ({
+  color: 'var(--gray-text-color)', // Цвет невыделенной иконки и текста
+  '&.Mui-selected': {
+    color: 'var(--blue-color)', // Цвет выделенной иконки и текста
+  },
+}));
+
 
 function App() {
   const { network } = useTonConnect();
@@ -87,10 +94,10 @@ function App() {
           value={currentTab}
           onChange={handleChange}
         >
-          <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-          <BottomNavigationAction label="Create" icon={<AddCircleIcon />} />
-          <BottomNavigationAction label="Request" icon={<RequestQuoteIcon />} />
-          <BottomNavigationAction label="About" icon={<InfoIcon />} />
+          <StyledBottomNavigationAction label="Home" icon={<HomeIcon />} />
+          <StyledBottomNavigationAction label="Create" icon={<AddCircleIcon />} />
+          <StyledBottomNavigationAction label="Request" icon={<RequestQuoteIcon />} />
+          <StyledBottomNavigationAction label="About" icon={<InfoIcon />} />
         </BottomNavigation>
       </FloatingBottomNavigation>
     </>

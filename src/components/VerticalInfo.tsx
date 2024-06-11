@@ -7,6 +7,7 @@ interface VerticalInfoProps {
   icon: React.ReactNode;
   text: string;
   value: string | number | null | undefined; 
+  separator: boolean;
 }
 
 const Container = styled(Box)`
@@ -33,13 +34,13 @@ const Value = styled(Typography)`
   color: #333;
 `;
 
-const VerticalInfo: React.FC<VerticalInfoProps> = ({ icon, text, value }) => {
+const VerticalInfo: React.FC<VerticalInfoProps> = ({ icon, text, value, separator }) => {
   return (
     <Container>
       <IconContainer>{icon}</IconContainer>
       <Text>{text}</Text>
       <Value>{value}</Value>
-      <Divider style={{ width: '100%' }} />
+      <Divider style={{ width: separator ? '100%' : '0%' }} />
     </Container>
   );
 };

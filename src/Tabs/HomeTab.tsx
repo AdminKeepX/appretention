@@ -199,26 +199,31 @@ const HomeTab: React.FC<HomeTabProps> = ({ onTabChange }) => {
           icon={<HomeOutlinedIcon fontSize="medium" style={{ color: 'var(--blue-color)' }} />}
           text="Address"
           value={address}
+          separator={true}
         />
         <VerticalInfo
           icon={<AssignmentOutlinedIcon fontSize="medium" style={{ color: 'var(--blue-color)' }} />}
           text="Amount of contracts"
           value={countIndex}
+          separator={true}
         />
         <VerticalInfo
           icon={<LockResetOutlinedIcon fontSize="medium" style={{ color: 'var(--blue-color)' }} />}
           text="All time Locked" 
           value={allTimeLocked}
+          separator={true}
         />
         <VerticalInfo
           icon={<ReceiptOutlinedIcon fontSize="medium" style={{ color: 'var(--blue-color)' }} />}
           text="All Time Refunded"
           value={allTimeRefunded}
+          separator={true}
         />
         <VerticalInfo
           icon={<InfoOutlinedIcon fontSize="medium" style={{ color: 'var(--blue-color)' }} />}
           text="Информация"
           value="123"
+          separator={false}
         />
       </Stack>
     </MiddleContainer>

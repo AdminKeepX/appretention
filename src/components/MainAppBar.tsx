@@ -3,6 +3,9 @@ import { AppBar, Toolbar, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import { TonConnectButton } from '@tonconnect/ui-react';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import appTheme from './appTheme';
 
 const GradientAppBar = styled(AppBar)`
   // background: linear-gradient(to right, #0276FF, #00E0FF);
@@ -20,15 +23,6 @@ const IconBox = styled(Box)`
   color: var(--white-color);
 `;
 
-const ButtonBox = styled(Box)`
-  // margin-left: auto;
-  // display: flex;
-  // align-items: center;
-  // justify-content: flex-end; /* Убедимся, что содержимое выравнивается по правому краю */
-  // padding-right: 16px
-  // margin-right: 16px;
-`;
-
 const ToolbarStyled = styled(Toolbar)`
   background: linear-gradient(to right, #0276FF, #00E0FF);
   height: 44px;
@@ -39,7 +33,8 @@ const ToolbarStyled = styled(Toolbar)`
 
 const MainAppBar: React.FC = () => {
   return (
-    // <GradientAppBar position="fixed">
+    <ThemeProvider theme={appTheme}>
+      <CssBaseline />
       <ToolbarStyled>
         <IconBox>
           <AutoAwesomeIcon />
@@ -47,11 +42,9 @@ const MainAppBar: React.FC = () => {
             Retention
           </Title>
         </IconBox>
-        <ButtonBox>
-          <TonConnectButton />
-        </ButtonBox>
+        <TonConnectButton  style={{ }}/>
       </ToolbarStyled>
-    // </GradientAppBar>
+      </ThemeProvider>
   );
 };
 
