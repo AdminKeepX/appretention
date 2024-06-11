@@ -21,13 +21,14 @@ import AboutTab from "./Tabs/AboutTab";
 
 import WebApp from '@twa-dev/sdk'
 
-const MainContainer = styled(Container)`
-  background-color: green; /* Устанавливаем белый фон */
-  margin-top: 0px; /* Высота AppBar */
-  padding: 0; /* Убираем отступы */
-  overflow-y: auto;
-  padding-bottom: 0px; /* Отступ для BottomNavigation */
-`;
+// const MainContainer = styled(Container)`
+//   background-color: white; /* Устанавливаем белый фон */
+//   margin-top: 0px; /* Высота AppBar */
+//   padding: 0; /* Убираем отступы */
+//   margin-bottm: 50px; /* Высота AppBar */
+//   overflow-y: auto;
+//   padding-bottom: 0px; /* Отступ для BottomNavigation */
+// `;
 
 const FloatingBottomNavigation = styled(Paper)`
   position: fixed;

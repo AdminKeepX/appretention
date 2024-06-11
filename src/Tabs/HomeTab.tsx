@@ -8,6 +8,11 @@ import Stack from '@mui/material/Stack';
 import '../App.css';
 import VerticalInfo from '../components/VerticalInfo';
 import InfoIcon from '@mui/icons-material/Info';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import LockResetOutlinedIcon from '@mui/icons-material/LockResetOutlined';
+import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 
 interface HomeTabProps {
   onTabChange: (tabIndex: number) => void;
@@ -25,6 +30,7 @@ interface HomeTabProps {
 const TopContainer = styled(Box)`
   background-color: var(--gray-background-color);
   box-sizing: border-box; /* Убедимся, что padding и border включены в размеры элемента */
+  padding-bottom: 40px;
 `;
 
 const MiddleContainer = styled(Box)`
@@ -34,7 +40,6 @@ const MiddleContainer = styled(Box)`
 
 const ImageContainer = styled(Box)`
   padding-top: 10px;
-  padding-bottom: 10px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -52,6 +57,14 @@ const InfoContainer = styled(Box)`
   overflow: hidden;
 `;
 
+const Fotter = styled(Box)`
+  background-color: var(--gray-background-color);
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  height: 84px;
+`;
+
 const CenteredTypography = styled(Typography)`
   padding-top: 20px;
   text-align: center;
@@ -60,11 +73,12 @@ const CenteredTypography = styled(Typography)`
 `;
 
 const CenteredMainBlock = styled(Typography)`
-  padding-top: 0px;
   padding-left: 70px;
   padding-right: 70px;
   text-align: center;
   color: var(--black-color);
+  padding-top: 0px;
+  padding-bottom: 0px;
 `;
 
 const LeftMainBlock = styled(Typography)`
@@ -88,15 +102,17 @@ const CenteredSecondaryBlock = styled(Typography)`
   padding-left: 30px;
   padding-right: 30px;
   text-align: center;
+  padding-top: 0px;
+  padding-bottom: 0px;
   color: var(--gray-text-color);
 `;
 
 const ButtonContainer = styled(Box)`
-  padding-top: 20px;
   display: flex;
   justify-content: center;
   width: 100%;
-  padding-bottom: 40px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   height: 44px;
 `;
 
@@ -109,6 +125,7 @@ const BlueButton = styled(Button)`
     background-color: #115293; /* Темно-синий цвет при наведении */
   }
   text-transform: none;
+  height: 44px;
 `;
 
 const GreyButton = styled(Button)`
@@ -120,6 +137,7 @@ const GreyButton = styled(Button)`
     background-color: #707070; /* Темно-серый цвет при наведении */
   }
   text-transform: none;
+  height: 44px;
 `;
 
 const HomeTab: React.FC<HomeTabProps> = ({ onTabChange }) => {
@@ -145,9 +163,9 @@ const HomeTab: React.FC<HomeTabProps> = ({ onTabChange }) => {
   };
 
   return (
-    <Stack spacing={4} >
+    <Stack spacing={0} >
     <TopContainer>
-      <Stack spacing={1} >
+      <Stack spacing={3} >
         <ImageContainer>
           <img src="https://imagedelivery.net/jXa8AdnaglgswFluUtTihA/5724030a-2864-4781-5c5b-de3f7e4a5b00/128" alt="Your Image" style={{ maxWidth: '100%', height: 'auto' }} />
         </ImageContainer>
@@ -178,32 +196,33 @@ const HomeTab: React.FC<HomeTabProps> = ({ onTabChange }) => {
         </LeftSecondaryBlock>
         <Divider />
         <VerticalInfo
-          icon={<InfoIcon fontSize="large" />}
+          icon={<HomeOutlinedIcon fontSize="medium" style={{ color: 'var(--blue-color)' }} />}
           text="Address"
           value={address}
         />
         <VerticalInfo
-          icon={<InfoIcon fontSize="large" />}
+          icon={<AssignmentOutlinedIcon fontSize="medium" style={{ color: 'var(--blue-color)' }} />}
           text="Amount of contracts"
           value={countIndex}
         />
         <VerticalInfo
-          icon={<InfoIcon fontSize="large" />}
+          icon={<LockResetOutlinedIcon fontSize="medium" style={{ color: 'var(--blue-color)' }} />}
           text="All time Locked" 
           value={allTimeLocked}
         />
         <VerticalInfo
-          icon={<InfoIcon fontSize="large" />}
+          icon={<ReceiptOutlinedIcon fontSize="medium" style={{ color: 'var(--blue-color)' }} />}
           text="All Time Refunded"
           value={allTimeRefunded}
         />
         <VerticalInfo
-          icon={<InfoIcon fontSize="large" />}
+          icon={<InfoOutlinedIcon fontSize="medium" style={{ color: 'var(--blue-color)' }} />}
           text="Информация"
           value="123"
         />
       </Stack>
     </MiddleContainer>
+    <Fotter />
     </Stack>
 
     

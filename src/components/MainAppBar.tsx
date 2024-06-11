@@ -11,11 +11,13 @@ const GradientAppBar = styled(AppBar)`
 
 const Title = styled(Typography)`
   margin-left: 16px;
+  color: var(--white-color);
 `;
 
 const IconBox = styled(Box)`
   display: flex;
   align-items: center;
+  color: var(--white-color);
 `;
 
 const ButtonBox = styled(Box)`
