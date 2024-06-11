@@ -15,20 +15,11 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { Container, styled } from "@mui/material";
 import { useState, useEffect } from "react";
 import HomeTab from "./Tabs/HomeTab";
-import CreateTab from "./Tabs/CreateTab";
+import Contracts from "./Tabs/Contracts";
 import Request from "./Tabs/Request";
 import AboutTab from "./Tabs/AboutTab";
 
 import WebApp from '@twa-dev/sdk'
-
-// const MainContainer = styled(Container)`
-//   background-color: white; /* Устанавливаем белый фон */
-//   margin-top: 0px; /* Высота AppBar */
-//   padding: 0; /* Убираем отступы */
-//   margin-bottm: 50px; /* Высота AppBar */
-//   overflow-y: auto;
-//   padding-bottom: 0px; /* Отступ для BottomNavigation */
-// `;
 
 const FloatingBottomNavigation = styled(Paper)`
   position: fixed;
@@ -43,14 +34,12 @@ const FloatingBottomNavigation = styled(Paper)`
   z-index: 1000;
 `;
 
-
 const StyledBottomNavigationAction = styled(BottomNavigationAction)(({ theme }) => ({
   color: 'var(--gray-text-color)', // Цвет невыделенной иконки и текста
   '&.Mui-selected': {
     color: 'var(--blue-color)', // Цвет выделенной иконки и текста
   },
 }));
-
 
 function App() {
   const { network } = useTonConnect();
@@ -70,7 +59,7 @@ function App() {
       content = <HomeTab onTabChange={setCurrentTab} />;
       break;
     case 1:
-      content = <CreateTab />;
+      content = <Contracts />;
       break;
     case 2:
       content = <Request />;
@@ -95,7 +84,7 @@ function App() {
           onChange={handleChange}
         >
           <StyledBottomNavigationAction label="Home" icon={<HomeIcon />} />
-          <StyledBottomNavigationAction label="Create" icon={<AddCircleIcon />} />
+          <StyledBottomNavigationAction label="Contracts" icon={<AddCircleIcon />} />
           <StyledBottomNavigationAction label="Request" icon={<RequestQuoteIcon />} />
           <StyledBottomNavigationAction label="About" icon={<InfoIcon />} />
         </BottomNavigation>
