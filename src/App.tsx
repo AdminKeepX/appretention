@@ -23,10 +23,10 @@ import WebApp from '@twa-dev/sdk'
 
 const MainContainer = styled(Container)`
   background-color: green; /* Устанавливаем белый фон */
-  margin-top: 20px; /* Высота AppBar */
+  margin-top: 0px; /* Высота AppBar */
   padding: 0; /* Убираем отступы */
   overflow-y: auto;
-  padding-bottom: 20px; /* Отступ для BottomNavigation */
+  padding-bottom: 0px; /* Отступ для BottomNavigation */
 `;
 
 const FloatingBottomNavigation = styled(Paper)`
@@ -77,9 +77,9 @@ function App() {
   return (
     <>
       <MainAppBar />
-      <MainContainer>
+      {/* <MainContainer> */}
         {content}
-      </MainContainer>
+      {/* </MainContainer> */}
       <FloatingBottomNavigation>
         <BottomNavigation
           showLabels

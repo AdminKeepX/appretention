@@ -5,18 +5,31 @@ import ContentContainer from '../components/ContentContainer';
 import { useMainContractAmount } from '../hooks/useMainContract';
 import { styled } from '@mui/system';
 import Stack from '@mui/material/Stack';
+import '../App.css';
+import VerticalInfo from '../components/VerticalInfo';
+import InfoIcon from '@mui/icons-material/Info';
 
 interface HomeTabProps {
   onTabChange: (tabIndex: number) => void;
 }
 
+// const StyledBox = styled(Box)(({ theme }) => ({
+//   padding: 0, // Устанавливаем внутренний отступ
+//   backgroundColor: theme.palette.background.paper,
+//   border: `10px solid ${theme.palette.divider}`,
+//   borderRadius: theme.shape.borderRadius,
+// }));
+
+
+
 const TopContainer = styled(Box)`
-  background-color: #FF0000; /* Серый фон */
-  padding-top: 0px;
-  padding-bottom: 0px;
-  display: flex;
-  width: 100%;
-  overflow: hidden;
+  background-color: var(--gray-background-color);
+  box-sizing: border-box; /* Убедимся, что padding и border включены в размеры элемента */
+`;
+
+const MiddleContainer = styled(Box)`
+  background-color: var(--white-color);
+  box-sizing: border-box; /* Убедимся, что padding и border включены в размеры элемента */
 `;
 
 const ImageContainer = styled(Box)`
@@ -43,13 +56,39 @@ const CenteredTypography = styled(Typography)`
   padding-top: 20px;
   text-align: center;
   width: 100%;
+  
 `;
 
-const CenteredSmallTypography = styled(Typography)`
+const CenteredMainBlock = styled(Typography)`
   padding-top: 0px;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 70px;
+  padding-right: 70px;
   text-align: center;
+  color: var(--black-color);
+`;
+
+const LeftMainBlock = styled(Typography)`
+  padding-top: 0px;
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: left;
+  color: var(--black-color);
+`;
+
+const LeftSecondaryBlock = styled(Typography)`
+  padding-top: 0px;
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: left;
+  color: var(--gray-text-color);
+`;
+
+const CenteredSecondaryBlock = styled(Typography)`
+  padding-top: 0px;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: center;
+  color: var(--gray-text-color);
 `;
 
 const ButtonContainer = styled(Box)`
@@ -64,21 +103,23 @@ const ButtonContainer = styled(Box)`
 const BlueButton = styled(Button)`
   flex: 1;
   margin: 0 8px;
-  background-color: #1976d2; /* Синий цвет */
+  background-color: var(--blue-color);
   color: white; /* Белый текст */
   &:hover {
     background-color: #115293; /* Темно-синий цвет при наведении */
   }
+  text-transform: none;
 `;
 
 const GreyButton = styled(Button)`
   flex: 1;
   margin: 0 8px;
-  background-color: #9e9e9e; /* Серый цвет */
-  color: white; /* Белый текст */
+  background-color: #ffffff; /* Серый цвет */
+  color: var(--black-color);
   &:hover {
     background-color: #707070; /* Темно-серый цвет при наведении */
   }
+  text-transform: none;
 `;
 
 const HomeTab: React.FC<HomeTabProps> = ({ onTabChange }) => {
@@ -104,31 +145,80 @@ const HomeTab: React.FC<HomeTabProps> = ({ onTabChange }) => {
   };
 
   return (
-    <div>
-      <TopContainer>
-        <Stack spacing={1}>
-          <ImageContainer>
-            <img src="https://imagedelivery.net/jXa8AdnaglgswFluUtTihA/5724030a-2864-4781-5c5b-de3f7e4a5b00/128" alt="Your Image" style={{ maxWidth: '100%', height: 'auto' }} />
-          </ImageContainer>
-          <CenteredSmallTypography variant="h6" gutterBottom>
-            Create payout contracts or request funds from accounts
-          </CenteredSmallTypography>
-          <CenteredSmallTypography variant="body1" gutterBottom>
-            Plan for long-term storage, create inheritance transfers, protect your capital from impulsive actions!
-          </CenteredSmallTypography>
-          <ButtonContainer>
-            <BlueButton onClick={handleCreateContract} variant="contained" style={{ flex: 1, marginRight: 8, marginLeft: 60 }}>
-              Create
-            </BlueButton>
-            <GreyButton onClick={handleRequestPayout} variant="contained" style={{ flex: 1, marginLeft: 8, marginRight: 60 }}>
-              Payout
-            </GreyButton>
-          </ButtonContainer>
-        </Stack>
-      </TopContainer>
+    <Stack spacing={4} >
+    <TopContainer>
+      <Stack spacing={1} >
+        <ImageContainer>
+          <img src="https://imagedelivery.net/jXa8AdnaglgswFluUtTihA/5724030a-2864-4781-5c5b-de3f7e4a5b00/128" alt="Your Image" style={{ maxWidth: '100%', height: 'auto' }} />
+        </ImageContainer>
+        <CenteredMainBlock variant="h5" gutterBottom>
+          Создавайте контракты или выводите токены из смарт-контрактов
+        </CenteredMainBlock>
+        <CenteredSecondaryBlock variant="body1" gutterBottom>
+          Планируйте долгосрочное хранение, создавайте наследственные переводы, защищайте свой капитал от импульсивных действий!
+        </CenteredSecondaryBlock>
+        <ButtonContainer>
+          <BlueButton onClick={handleCreateContract} variant="contained" style={{ flex: 1, marginRight: 8, marginLeft: 60 }}>
+            Создать
+          </BlueButton>
+          <GreyButton onClick={handleRequestPayout} variant="contained" style={{ flex: 1, marginLeft: 8, marginRight: 60 }}>
+            Запросить
+          </GreyButton>
+        </ButtonContainer>
+      </Stack>
+    </TopContainer>
+    <MiddleContainer>
+    <Stack spacing={1}>
+        
+        <LeftMainBlock variant="h5" gutterBottom>
+          Обзор контракта
+        </LeftMainBlock>
+        <LeftSecondaryBlock variant="body1" gutterBottom>
+          Планируйте долгосрочное хранение, создавайте наследственные переводы, защищайте свой капитал от импульсивных действий!
+        </LeftSecondaryBlock>
+        <Divider />
+        <VerticalInfo
+          icon={<InfoIcon fontSize="large" />}
+          text="Address"
+          value={address}
+        />
+        <VerticalInfo
+          icon={<InfoIcon fontSize="large" />}
+          text="Amount of contracts"
+          value={countIndex}
+        />
+        <VerticalInfo
+          icon={<InfoIcon fontSize="large" />}
+          text="All time Locked" 
+          value={allTimeLocked}
+        />
+        <VerticalInfo
+          icon={<InfoIcon fontSize="large" />}
+          text="All Time Refunded"
+          value={allTimeRefunded}
+        />
+        <VerticalInfo
+          icon={<InfoIcon fontSize="large" />}
+          text="Информация"
+          value="123"
+        />
+      </Stack>
+    </MiddleContainer>
+    </Stack>
+
+    
+  );
+};
+
+export default HomeTab;
+
+
+
+
+
       {/* <InfoContainer>
         <Typography variant="body1" gutterBottom>
-          Address: {address}
+          Address: 
         </Typography>
         <Typography variant="body1" gutterBottom>
           Amount of contracts: {countIndex}
@@ -177,8 +267,3 @@ const HomeTab: React.FC<HomeTabProps> = ({ onTabChange }) => {
           </TableBody>
         </Table>
       </TableContainer> */}
-    </div>
-  );
-};
-
-export default HomeTab;
