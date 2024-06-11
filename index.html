@@ -1,54 +1,4 @@
-<html>
-  <head>
-    <style>
-      .scrollable-element {
-        overflow-y: scroll;
-        height: 32rem;
-        font-size: 6.25rem;
-        border: 1px solid;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="scrollable-element">
-      <div>Item 1</div>
-      <div>Item 2</div>
-      <div>Item 3</div>
-      <div>Item 4</div>
-      <div>Item 5</div>
-      <div>Item 6</div>
-      <div>Item 7</div>
-      <div>Item 8</div>
-      <div>Item 9</div>
-      <div>Item 10</div>
-    </div>
-    <script>
-      function ensureDocumentIsScrollable() {
-        const isScrollable =
-          document.documentElement.scrollHeight > window.innerHeight;
-        if (!isScrollable) {
-          document.documentElement.style.setProperty(
-            "height",
-            "calc(100vh + 1px)",
-            "important"
-          );
-        }
-      }
-      function preventCollapse() {
-        if (window.scrollY === 0) {
-          window.scrollTo(0, 1);
-        }
-      }
-
-      const scrollableElement = document.querySelector(".scrollable-element");
-      scrollableElement.addEventListener("touchstart", preventCollapse);
-
-      window.addEventListener("load", ensureDocumentIsScrollable);
-    </script>
-  </body>
-</html>
-
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <style>
@@ -60,36 +10,14 @@
       }
     </style>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/appretention/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover" />
     <title>$Retention | TON</title>
+    <script type="module" crossorigin src="/appretention/assets/index-f0babe0c.js"></script>
+    <link rel="stylesheet" href="/appretention/assets/index-b41033e1.css">
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx">
-      function ensureDocumentIsScrollable() {
-        const isScrollable =
-          document.documentElement.scrollHeight > window.innerHeight;
-        if (!isScrollable) {
-          document.documentElement.style.setProperty(
-            "height",
-            "calc(100vh + 1px)",
-            "important"
-          );
-        }
-      }
-      function preventCollapse() {
-        if (window.scrollY === 0) {
-          window.scrollTo(0, 1);
-        }
-      }
-
-      const scrollableElement = document.querySelector(".scrollable-element");
-      scrollableElement.addEventListener("touchstart", preventCollapse);
-
-      window.addEventListener("load", ensureDocumentIsScrollable);
-    </script>
+    
   </body>
 </html>
-
-content="width=device-width, initial-scale=1.0" -->
