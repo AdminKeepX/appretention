@@ -400,7 +400,7 @@ PERFORMANCE OF THIS SOFTWARE.
     line-height: ${$=>$.lineHeight};
 
     color: ${$=>$.color};
-`,Text$2=$=>{const j=useTheme$4(),[et]=useI18n();let tt;const it=()=>$.color||j.colors.text.primary,rt=mergeProps({fontSize:"14px",fontWeight:"510",lineHeight:"130%"},$);return createEffect(()=>{tt&&rt.cursor!=="unset"&&getComputedStyle(tt).cursor!=="pointer"&&(tt.style.cursor="default")}),createComponent(TextStyled$3,{get fontSize(){return rt.fontSize},get fontWeight(){return rt.fontWeight},get lineHeight(){return rt.lineHeight},get color(){return it()},get class(){return rt.class},ref(st){const ut=tt;typeof ut=="function"?ut(st):tt=st},"data-tc-text":"true",get children(){var st;return createMemo(()=>!!rt.translationKey)()?et(rt.translationKey,rt.translationValues,(st=rt.children)==null?void 0:st.toString()):rt.children}})},ImageContainer$2=styled$5.div`
+`,Text$2=$=>{const j=useTheme$4(),[et]=useI18n();let tt;const it=()=>$.color||j.colors.text.primary,rt=mergeProps({fontSize:"14px",fontWeight:"510",lineHeight:"130%"},$);return createEffect(()=>{tt&&rt.cursor!=="unset"&&getComputedStyle(tt).cursor!=="pointer"&&(tt.style.cursor="default")}),createComponent(TextStyled$3,{get fontSize(){return rt.fontSize},get fontWeight(){return rt.fontWeight},get lineHeight(){return rt.lineHeight},get color(){return it()},get class(){return rt.class},ref(st){const ut=tt;typeof ut=="function"?ut(st):tt=st},"data-tc-text":"true",get children(){var st;return createMemo(()=>!!rt.translationKey)()?et(rt.translationKey,rt.translationValues,(st=rt.children)==null?void 0:st.toString()):rt.children}})},ImageContainer$3=styled$5.div`
     position: relative;
 
     &::after {
@@ -419,7 +419,7 @@ PERFORMANCE OF THIS SOFTWARE.
     width: 100%;
     height: 100%;
     border-radius: inherit;
-`,WalletImage=$=>createComponent(ImageContainer$2,{get class(){return $.class},get children(){return createComponent(ImageStyled$2,{get src(){return $.src}})}}),borders$3={m:"16px",s:"12px",none:"0"},badgeBorders={m:"6px",s:"6px",none:"0"},WalletItemStyled=styled$5.button`
+`,WalletImage=$=>createComponent(ImageContainer$3,{get class(){return $.class},get children(){return createComponent(ImageStyled$2,{get src(){return $.src}})}}),borders$3={m:"16px",s:"12px",none:"0"},badgeBorders={m:"6px",s:"6px",none:"0"},WalletItemStyled=styled$5.button`
     position: relative;
     cursor: pointer;
     border: none;
@@ -1263,7 +1263,7 @@ Values:
 `,MiddleContainer$1=styled$3(Box$1)`
   background-color: var(--white-color);
   box-sizing: border-box; /* Убедимся, что padding и border включены в размеры элемента */
-`,ImageContainer$1=styled$3(Box$1)`
+`,ImageContainer$2=styled$3(Box$1)`
   padding-top: 10px;
   display: flex;
   justify-content: center;
@@ -1278,7 +1278,7 @@ Values:
   max-width: 100%;
   margin-bottom: 0px;
   overflow: hidden;
-`;const Fotter=styled$3(Box$1)`
+`;const Fotter$1=styled$3(Box$1)`
   background-color: var(--gray-background-color);
   width: 100%;
   max-width: 100%;
@@ -1323,7 +1323,7 @@ Values:
   padding-top: 0px;
   padding-bottom: 0px;
   height: 44px;
-`,BlueButton=styled$3(Button$1)`
+`,BlueButton$1=styled$3(Button$1)`
   flex: 1;
   margin: 0 8px;
   background-color: var(--blue-color);
@@ -1343,23 +1343,23 @@ Values:
   }
   text-transform: none;
   height: 44px;
-`,HomeTab=({onTabChange:$})=>{reactExports.useState(1),reactExports.useState([{id:1,name:"Contract 1",amount:100,date:"2024-05-25"},{id:2,name:"Contract 2",amount:200,date:"2024-06-15"}]);const j=()=>{$(1)},et=()=>{$(2)},{address:tt,countIndex:it,currentLocked:rt,allTimeLocked:st,allTimeRefunded:ut,commission:ft}=useMainContractAmount();return jsxs(Stack$1,{spacing:0,children:[jsx$1(TopContainer$1,{children:jsxs(Stack$1,{spacing:3,children:[jsx$1(ImageContainer$1,{children:jsx$1("img",{src:"https://imagedelivery.net/jXa8AdnaglgswFluUtTihA/5724030a-2864-4781-5c5b-de3f7e4a5b00/128",alt:"Your Image",style:{maxWidth:"100%",height:"auto"}})}),jsx$1(CenteredMainBlock$1,{variant:"h5",gutterBottom:!0,children:"Создавайте контракты или выводите токены из смарт-контрактов"}),jsx$1(CenteredSecondaryBlock$1,{variant:"body1",gutterBottom:!0,children:"Планируйте долгосрочное хранение, создавайте наследственные переводы, защищайте свой капитал от импульсивных действий!"}),jsxs(ButtonContainer,{children:[jsx$1(BlueButton,{onClick:j,variant:"contained",style:{flex:1,marginRight:8,marginLeft:60},children:"Создать"}),jsx$1(GreyButton,{onClick:et,variant:"contained",style:{flex:1,marginLeft:8,marginRight:60},children:"Запросить"})]})]})}),jsx$1(MiddleContainer$1,{children:jsxs(Stack$1,{spacing:1,children:[jsx$1(LeftMainBlock,{variant:"h5",gutterBottom:!0,children:"Обзор контракта"}),jsx$1(LeftSecondaryBlock,{variant:"body1",gutterBottom:!0,children:"Планируйте долгосрочное хранение, создавайте наследственные переводы, защищайте свой капитал от импульсивных действий!"}),jsx$1(Divider$1,{}),jsx$1(VerticalInfo,{icon:jsx$1(default_1$4,{fontSize:"medium",style:{color:"var(--blue-color)"}}),text:"Address",value:tt,separator:!0}),jsx$1(VerticalInfo,{icon:jsx$1(default_1,{fontSize:"medium",style:{color:"var(--blue-color)"}}),text:"Amount of contracts",value:it,separator:!0}),jsx$1(VerticalInfo,{icon:jsx$1(default_1$3,{fontSize:"medium",style:{color:"var(--blue-color)"}}),text:"All time Locked",value:st,separator:!0}),jsx$1(VerticalInfo,{icon:jsx$1(default_1$2,{fontSize:"medium",style:{color:"var(--blue-color)"}}),text:"All Time Refunded",value:ut,separator:!0}),jsx$1(VerticalInfo,{icon:jsx$1(default_1$1,{fontSize:"medium",style:{color:"var(--blue-color)"}}),text:"Информация",value:"123",separator:!1})]})}),jsx$1(Fotter,{})]})},Container$1=styled$3(Box$1)`
+`,HomeTab=({onTabChange:$})=>{reactExports.useState(1),reactExports.useState([{id:1,name:"Contract 1",amount:100,date:"2024-05-25"},{id:2,name:"Contract 2",amount:200,date:"2024-06-15"}]);const j=()=>{$(1)},et=()=>{$(2)},{address:tt,countIndex:it,currentLocked:rt,allTimeLocked:st,allTimeRefunded:ut,commission:ft}=useMainContractAmount();return jsxs(Stack$1,{spacing:0,children:[jsx$1(TopContainer$1,{children:jsxs(Stack$1,{spacing:3,children:[jsx$1(ImageContainer$2,{children:jsx$1("img",{src:"https://imagedelivery.net/jXa8AdnaglgswFluUtTihA/5724030a-2864-4781-5c5b-de3f7e4a5b00/128",alt:"Your Image",style:{maxWidth:"100%",height:"auto"}})}),jsx$1(CenteredMainBlock$1,{variant:"h5",gutterBottom:!0,children:"Создавайте контракты или выводите токены из смарт-контрактов"}),jsx$1(CenteredSecondaryBlock$1,{variant:"body1",gutterBottom:!0,children:"Планируйте долгосрочное хранение, создавайте наследственные переводы, защищайте свой капитал от импульсивных действий!"}),jsxs(ButtonContainer,{children:[jsx$1(BlueButton$1,{onClick:j,variant:"contained",style:{flex:1,marginRight:8,marginLeft:60},children:"Создать"}),jsx$1(GreyButton,{onClick:et,variant:"contained",style:{flex:1,marginLeft:8,marginRight:60},children:"Запросить"})]})]})}),jsx$1(MiddleContainer$1,{children:jsxs(Stack$1,{spacing:1,children:[jsx$1(LeftMainBlock,{variant:"h5",gutterBottom:!0,children:"Обзор контракта"}),jsx$1(LeftSecondaryBlock,{variant:"body1",gutterBottom:!0,children:"Планируйте долгосрочное хранение, создавайте наследственные переводы, защищайте свой капитал от импульсивных действий!"}),jsx$1(Divider$1,{}),jsx$1(VerticalInfo,{icon:jsx$1(default_1$4,{fontSize:"medium",style:{color:"var(--blue-color)"}}),text:"Address",value:tt,separator:!0}),jsx$1(VerticalInfo,{icon:jsx$1(default_1,{fontSize:"medium",style:{color:"var(--blue-color)"}}),text:"Amount of contracts",value:it,separator:!0}),jsx$1(VerticalInfo,{icon:jsx$1(default_1$3,{fontSize:"medium",style:{color:"var(--blue-color)"}}),text:"All time Locked",value:st,separator:!0}),jsx$1(VerticalInfo,{icon:jsx$1(default_1$2,{fontSize:"medium",style:{color:"var(--blue-color)"}}),text:"All Time Refunded",value:ut,separator:!0}),jsx$1(VerticalInfo,{icon:jsx$1(default_1$1,{fontSize:"medium",style:{color:"var(--blue-color)"}}),text:"Информация",value:"123",separator:!1})]})}),jsx$1(Fotter$1,{})]})},Container$1=styled$3(Box$1)`
     background-color: var(--dark-gray-background-color);
     display: flex;
     flex-direction: column;
-    align-items: left;
-    text-align: left;
-    padding-left: 16px;
-    width: 350px;
-    height: 600px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 280px;
+    height: 480px;
     border-radius: 16px;
     flex-shrink: 0; // Предотвращаем сжатие карточек
     margin-right: 16px; // Добавляем отступ между карточками
     
 `,Text=styled$3(Typography$1)`
     color: var(--black-color);
-    
-    margin-top: 30px;
+    margin-top: 0px;
     font-size: 24px;
     text-align: center;
     font-family: 'Lato, sans-serif';
@@ -1373,9 +1373,24 @@ Values:
     color: var(--sblack-color);
     font-family: 'Open Sans, sans-serif';
     font-weight: 500; // Обычный (Regular)
-`;styled$3(Button$1)`
-  
-`;const SmartContractCard=({title:$,text:j,url:et,action:tt})=>jsxs(Container$1,{children:[jsx$1(Text,{children:$}),jsx$1(SubText,{children:j})]}),TopContainer=styled$3(Box$1)`
+`,ImageContainer$1=styled$3(Box$1)`
+    // background-color: var(--blue-color);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+`,BlueButton=styled$3(Button$1)`
+    background-color: var(--blue-color);
+    color: white; /* Белый текст */
+    &:hover {
+        background-color: #115293; /* Темно-синий цвет при наведении */
+    }
+    text-transform: none;
+    height: 44px;
+    margin: 0px 20px 0px 20px; /* Отступы слева, справа и снизу */
+`,SmartContractCard=({title:$,text:j,url:et,action:tt})=>jsxs(Container$1,{children:[jsx$1(Text,{children:$}),jsx$1(SubText,{children:j}),jsx$1(ImageContainer$1,{children:jsx$1("img",{src:"https://imagedelivery.net/jXa8AdnaglgswFluUtTihA/1c34150f-7927-4c07-34f6-cc3eb3757300/192",alt:"Your Image",style:{maxWidth:"100%",height:"auto"}})}),jsx$1(BlueButton,{onClick:()=>{},children:"Открыть"})]}),TopContainer=styled$3(Box$1)`
     background-color: var(--gray-background-color);
     box-sizing: border-box; /* Убедимся, что padding и border включены в размеры элемента */
     padding-bottom: 40px;
@@ -1400,7 +1415,7 @@ Values:
     max-width: 100%;
     margin-bottom: 0px;
     overflow: hidden;
-`;styled$3(Box$1)`
+`;const Fotter=styled$3(Box$1)`
   background-color: var(--gray-background-color);
   width: 100%;
   max-width: 100%;
@@ -1456,7 +1471,7 @@ Values:
     background-color: var(--dark-gray-background-color);
     border-radius: 4px;
   }
-`,Contracts=()=>jsxs(Stack$1,{spacing:5,children:[jsx$1(TopContainer,{children:jsxs(Stack$1,{spacing:3,children:[jsx$1(ImageContainer,{children:jsx$1("img",{src:"https://imagedelivery.net/jXa8AdnaglgswFluUtTihA/5724030a-2864-4781-5c5b-de3f7e4a5b00/128",alt:"Your Image",style:{maxWidth:"100%",height:"auto"}})}),jsxs(Stack$1,{spacing:1,children:[jsx$1(CenteredMainBlock,{variant:"h5",gutterBottom:!0,children:"Погрузись в новый мир"}),jsx$1(CenteredMainBlock,{variant:"h5",gutterBottom:!0,children:"финансовых возможностей вместе с"}),jsx$1(CenteredMainBlock,{variant:"h5",gutterBottom:!0,children:"Retention!"})]}),jsx$1(CenteredSecondaryBlock,{variant:"body1",gutterBottom:!0,children:"Мы предлагаем готовые смарт-контракты для безопасных финансовых операций. Добро пожаловать в мир web3! Планируйте долгосрочное хранение токенов, создавайте наследственные переводы, создайте свой фонд финансовой свободы и защищайте свой капитал от импульсивных действий. С нами ваши финансовые операции станут надежными и прозрачными."})]})}),jsx$1(MiddleContainer,{children:jsxs(Stack$1,{spacing:1,children:[jsx$1(CenteredMainBlock,{variant:"h5",gutterBottom:!0,children:"Обзор контрактов"}),jsx$1(CenteredSecondaryBlock,{variant:"body1",gutterBottom:!0,children:'"Пользоваться готовыми контрактами очень легко! Внимательно изучайте правила использования контракта и переходите к его активации. Вот несколько самых популярных контрактов, которые уже работают."'})]})}),jsx$1(CardContainer,{children:jsx$1(ScrollContainer,{children:[{title:"Deposit and Lock",text:"Вы вносите депозит и указваете дату раньше которой которой не сможете вывести деньги со смарт-контракта",url:"#",action:"Action 1"},{title:"Card 2",text:"This is card 2",url:"#",action:"Action 2"},{title:"Card 3",text:"This is card 3",url:"#",action:"Action 3"}].map((j,et)=>jsx$1(SmartContractCard,{title:j.title,text:j.text,url:j.url,action:j.action},et))})})]});function useRefundContract(){const{client:$}=useTonClient(),{sender:j,network:et}=useTonConnect(),tt=useAsyncInitialize(async()=>{if(!$)return;const it=RetentionMain.fromAddress(dist$2.Address.parse("EQBLaZvlEJYbzIH7-QFCwMaklQFNAXfmyj5a41KmHk--rl6P"));return $.open(it)},[$]);return{requestRefund:()=>{tt.send(j,{value:dist$2.toNano("0.5")},{$$type:"RefundIfPossible",memo:"171819",secret:"GreedIsGood"})}}}const Container=styled$3(Box$1)`
+`,Contracts=()=>jsxs(Stack$1,{spacing:5,children:[jsx$1(TopContainer,{children:jsxs(Stack$1,{spacing:3,children:[jsx$1(ImageContainer,{children:jsx$1("img",{src:"https://imagedelivery.net/jXa8AdnaglgswFluUtTihA/5724030a-2864-4781-5c5b-de3f7e4a5b00/128",alt:"Your Image",style:{maxWidth:"100%",height:"auto"}})}),jsxs(Stack$1,{spacing:1,children:[jsx$1(CenteredMainBlock,{variant:"h5",gutterBottom:!0,children:"Погрузись в новый мир"}),jsx$1(CenteredMainBlock,{variant:"h5",gutterBottom:!0,children:"финансовых возможностей вместе с"}),jsx$1(CenteredMainBlock,{variant:"h5",gutterBottom:!0,children:"Retention!"})]}),jsx$1(CenteredSecondaryBlock,{variant:"body1",gutterBottom:!0,children:"Мы предлагаем готовые смарт-контракты для безопасных финансовых операций. Добро пожаловать в мир web3! Планируйте долгосрочное хранение токенов, создавайте наследственные переводы, создайте свой фонд финансовой свободы и защищайте свой капитал от импульсивных действий. С нами ваши финансовые операции станут надежными и прозрачными."})]})}),jsx$1(MiddleContainer,{children:jsxs(Stack$1,{spacing:1,children:[jsx$1(CenteredMainBlock,{variant:"h5",gutterBottom:!0,children:"Обзор контрактов"}),jsx$1(CenteredSecondaryBlock,{variant:"body1",gutterBottom:!0,children:'"Пользоваться готовыми контрактами очень легко! Внимательно изучайте правила использования контракта и переходите к его активации. Вот несколько самых популярных контрактов, которые уже работают."'})]})}),jsx$1(CardContainer,{children:jsx$1(ScrollContainer,{children:[{title:"Deposit and Lock",text:"Вы вносите депозит и указваете дату раньше которой которой не сможете вывести деньги со смарт-контракта",url:"#",action:"Action 1"},{title:"Card 2",text:"This is card 2",url:"#",action:"Action 2"},{title:"Card 3",text:"This is card 3",url:"#",action:"Action 3"}].map((j,et)=>jsx$1(SmartContractCard,{title:j.title,text:j.text,url:j.url,action:j.action},et))})}),jsx$1(Fotter,{})]});function useRefundContract(){const{client:$}=useTonClient(),{sender:j,network:et}=useTonConnect(),tt=useAsyncInitialize(async()=>{if(!$)return;const it=RetentionMain.fromAddress(dist$2.Address.parse("EQBLaZvlEJYbzIH7-QFCwMaklQFNAXfmyj5a41KmHk--rl6P"));return $.open(it)},[$]);return{requestRefund:()=>{tt.send(j,{value:dist$2.toNano("0.5")},{$$type:"RefundIfPossible",memo:"171819",secret:"GreedIsGood"})}}}const Container=styled$3(Box$1)`
   display: flex;
   flex-direction: column;
   align-items: center;
