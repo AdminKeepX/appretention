@@ -171,6 +171,7 @@ const Contracts: React.FC = () => {
       ))}
     </ScrollContainer>
     </CardContainer>
+    <Fotter />
     </Stack>
     
     
